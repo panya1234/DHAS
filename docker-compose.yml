@@ -1,0 +1,17 @@
+version: '3.9'
+services:  
+  nodejs_misa:
+    build: ./dhas_nodejs/
+    container_name: nodejs_misa
+    ports:
+      - 3000:8080
+    volumes:
+      - ./dhas_nodejs/CSV:/usr/src/app/CSV
+
+  quickbook_connect:
+    build: ./quickbook_connect/
+    container_name: quickbook_connect
+    ports:
+      - 8000:8000
+    volumes:
+      - ./dhas_nodejs/CSV:/app/quickbook_connect/target/CSV
