@@ -6,9 +6,5 @@ RUN npm install --production --silent && mv node_modules ../
 COPY . .
 EXPOSE 8000
 RUN chown -R node /usr/src/app
-RUN chown -R node /usr/src/app/CSV/WRITE/Orders/Philippines
-RUN chown -R node /usr/src/app/CSV/WRITE/Orders/South_Vietnam
-RUN chown -R node /usr/src/app/CSV/WRITE/Orders/North_Vietnam
-RUN chown -R node /usr/src/app/CSV/WRITE/Orders/Indonesia
 USER node
 CMD ["node", "app.js"]
