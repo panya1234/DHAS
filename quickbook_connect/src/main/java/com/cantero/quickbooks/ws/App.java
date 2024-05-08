@@ -22,8 +22,8 @@ public class App {
         Endpoint.publish("http://0.0.0.0:8080/GetItemInventoryQueryRq", new GetItemInventoryQueryRq());
         System.out.println("Test GetItemInventoryQueryRq");
 
-        Endpoint.publish("http://0.0.0.0:8080/GetCustomersQueryRq", new GetCustomersQueryRq());
-        System.out.println("Test GetCustomersQueryRq");
+        Endpoint.publish("http://0.0.0.0:8080/GetCustomerQueryRq", new GetCustomerQueryRq());
+        System.out.println("Test GetCustomerQueryRq");
 
         Endpoint.publish("http://0.0.0.0:8080/AddSOPhilippines", new AddSOPhilippines());
         System.out.println("Test AddSOPhilippines");

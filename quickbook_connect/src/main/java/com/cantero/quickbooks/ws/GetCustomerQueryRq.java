@@ -24,7 +24,7 @@ import com.opencsv.CSVWriter;
  */
 @SuppressWarnings("unused")
 @WebService(endpointInterface = "com.cantero.quickbooks.ws.QBWebConnectorSvcSoap")
-public class GetCustomersQueryRq implements QBWebConnectorSvcSoap {
+public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
 
 
     @Override
