@@ -5,15 +5,15 @@ const JOB_SCHEDULE_ACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PRODUCTS = '30 4 * * *';
 
 // path csv
-const READ_PATH = './CSV/READ/';
-const WRITE_PATH = './CSV/WRITE/Orders/';
+const READ_PATH = 'CSV/READ/';
+const WRITE_PATH = 'CSV/WRITE/Orders/';
 
 // path log
-const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';
-const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';
+const ACCOUNT_PATH  = 'CSV/WRITE/Logs/AccountLogs/';
+const PRODUCT_PATH = 'CSV/WRITE/Logs/ProductLogs/';
 
 // path error orders
-const ERROR_ORDER_PATH = './CSV/WRITE/Logs/OrderLogs/';
+const ERROR_ORDER_PATH = 'CSV/WRITE/Logs/OrderLogs/';
 
 // oauth2 info
 const USERNAME = 'panyakan@ignite-idea.com.partialuat';
