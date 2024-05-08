@@ -1,12 +1,15 @@
 package com.cantero.quickbooks.ws;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import javax.jws.WebService;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,6 +23,7 @@ import org.xml.sax.SAXException;
 import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.List;
 import com.opencsv.CSVReader;
@@ -64,13 +68,13 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
      */
     @Override
     public int receiveResponseXML(String ticket, String response, String hresult, String message) {
-        final String SO_FILE_PATH = "CSV/WRITE/Orders/Philippines/ordersPH.csv";
-        final String SO_LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/OrderItemsPH.csv";
-        final String DELETED_SO_FILE_PATH = "CSV/WRITE/Orders/Philippines/Error/orderLogsPH.csv";
-        final String DELETED_SO_LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/Error/OrderItemLogsPH.csv";
+        final String FILE_PATH = "CSV/WRITE/Orders/Philippines/ordersPH.csv";
+        final String LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/OrderItemsPH.csv";
+        final String ERROR_FILE_PATH = "CSV/READ/errorOrders.csv";
+        // final String ERROR_LINE_ITEMS_FILE_PATH = "C:/DHAS/dhas_nodejs/CSV/WRITE/Orders/Error/OrderItemLogsPH.csv";
 
-        try (CSVReader readerSO = new CSVReader(new FileReader(SO_FILE_PATH));
-             CSVReader readerSOItems = new CSVReader(new FileReader(SO_LINE_ITEMS_FILE_PATH))){
+        try (CSVReader readerSO = new CSVReader(new FileReader(FILE_PATH));
+             CSVReader readerSOItems = new CSVReader(new FileReader(LINE_ITEMS_FILE_PATH))){
             List<String[]> allRows = readerSO.readAll();
             List<String[]> allItemRows = readerSOItems.readAll();
 
@@ -106,23 +110,25 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
                         }
                     }
         
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(SO_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(SO_LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
                 } else {
                     Element salesOrderAddElement = (Element) salesOrderAddRs.item(0);
                     String statusMessage = salesOrderAddElement.getAttribute("statusMessage");
-                    System.out.println("Status Message: " + statusMessage);
+                    // System.out.println("Status Message: " + statusMessage);
                     String statusMessageRow = statusMessage;
 
                     ArrayList<String[]> deletedRows = new ArrayList<>();
                     ArrayList<String[]> deletedItemRows = new ArrayList<>();
 
                     String orderId = "";
+                    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+                    LocalDate now = LocalDate.now();  
                     Iterator<String[]> iterator = allRows.iterator();
                     if (iterator.hasNext()) {
                         iterator.next();
@@ -131,7 +137,9 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
                         String[] row = iterator.next();
                         orderId = row[0];
                         iterator.remove();
-                        row[2] = row[2] + "," + statusMessage;
+                        row = Arrays.copyOf(row, row.length + 2);
+                        row[row.length - 2] = statusMessage;
+                        row[row.length - 1] = dtf.format(now);
                         deletedRows.add(row);
                         break;
                     }
@@ -146,42 +154,39 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
                         }
                     }
 
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(SO_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(SO_LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
-
-                    CSVWriter writerDeletedOrders = new CSVWriter(new FileWriter(DELETED_SO_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-                    writerDeletedOrders.writeAll(deletedRows);
+                    
+                    CSVWriter writerDeletedOrders = new CSVWriter(new FileWriter(ERROR_FILE_PATH, true)); // ใช้โหมด append โดยระบุ true
+                    if (new File(ERROR_FILE_PATH).length() > 0) { // เช็คว่าไฟล์มีข้อมูลอยู่แล้วหรือไม่
+                        writerDeletedOrders.writeAll(deletedRows);
+                    } else {
+                        writerDeletedOrders.writeNext(new String[]{"soId", "accountName", "qbSalesOrder", "errorReason", "errorDate"});
+                        writerDeletedOrders.writeAll(deletedRows);
+                    }
                     writerDeletedOrders.close();
 
-                    CSVWriter writerDeletedItems = new CSVWriter(new FileWriter(DELETED_SO_LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
-                    writerDeletedItems.writeAll(deletedItemRows);
-                    writerDeletedItems.close();
+                    // CSVWriter writerDeletedItems = new CSVWriter(new FileWriter(ERROR_LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    // writerDeletedItems.writeAll(deletedItemRows);
+                    // writerDeletedItems.close();
+                    System.out.println("Updated Logs: " + ERROR_FILE_PATH);
                 }
                 System.out.println("Status Severity: " + statusSeverity);
-                
+                System.out.println("Updated CSV: " + FILE_PATH + LINE_ITEMS_FILE_PATH);
             }
         } catch (Exception e) {
             e.printStackTrace();
             return -1; 
         }
+
+        // System.out.println(response);
         return 100;
     }
-    // @Override
-    // public String sendRequestXML(String ticket, String strHCPResponse,
-    // 		String strCompanyFileName, String qbXMLCountry, int qbXMLMajorVers,
-    // 		int qbXMLMinorVers) {
-    // 	//Example qbXML to Query for an Item
-    // 	//http://www.consolibyte.com/wiki/doku.php/quickbooks_qbxml_itemquery
-    // 	// String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><SalesOrderQueryRq requestID=\"1\"></SalesOrderQueryRq ></QBXMLMsgsRq></QBXML>";
-    // 	String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><SalesOrderAddRq  requestID=\"2\"><SalesOrderAdd><CustomerRef><FullName >test</FullName></CustomerRef><TxnDate>2013-05-23</TxnDate><RefNumber>$requestID</RefNumber><BillAddress><Addr1>China Town One</Addr1><Addr2>China Town Two</Addr2><City>Pta Nai</City><State>Dont Know</State><PostalCode>420420</PostalCode><Country>PK</Country></BillAddress><ShipAddress><Addr1>China Town One</Addr1><Addr2>China Town Two</Addr2><City>Houston</City><State>TX</State><PostalCode>77074</PostalCode><Country>US</Country></ShipAddress><SalesOrderLineAdd><ItemRef><FullName>I0001</FullName></ItemRef><Desc>CHF</Desc><Quantity>15</Quantity><Amount>59.25</Amount></SalesOrderLineAdd><SalesOrderLineAdd><ItemRef><FullName>I0003</FullName></ItemRef><Desc>High Blood Pressure</Desc><Quantity>15</Quantity><Amount>59.25</Amount></SalesOrderLineAdd></SalesOrderAdd></SalesOrderAddRq></QBXMLMsgsRq></QBXML>";
-
-    // 	return query;
-    // }
 
     @Override
     public String sendRequestXML(String ticket, String strHCPResponse,

@@ -2,10 +2,10 @@ import axios from "axios";
 import fs from 'fs';
 import csv from 'csv-parser';
 import qs from 'qs';
-import { READ_PATH, ACCOUNT_PATH } from './config.js';
+import { ERROR_ORDER_PATH, READ_PATH } from './config.js';
 import { USERNAME, PASSWORD, GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
 
-async function readAccountFromCSV(filePath) {
+async function readOrderFromCSV(filePath) {
     return new Promise((resolve, reject) => {
         const body = [];
         let chunk = [];
@@ -51,9 +51,9 @@ async function getTokenFromFile(filePath) {
     });
 }
 
-async function postAccounts(token, chunk) {
+async function postErrorOrders(token, chunk) {
     try {
-        const response = await axios.post('https://flow-dream-5899--partialuat.sandbox.my.salesforce.com/services/apexrest/object/accounts',
+        const response = await axios.post('https://flow-dream-5899--partialuat.sandbox.my.salesforce.com/services/apexrest/object/errorOrders',
         chunk,
             {
                 headers: {
@@ -66,7 +66,7 @@ async function postAccounts(token, chunk) {
         console.error('Error response data:', error.response.data);
         if (error.response.data.some(obj => obj.errorCode === 'INVALID_SESSION_ID')) {
             const newToken = await refreshToken();
-            return await postAccounts(newToken, chunk);
+            return await postErrorOrders(newToken, chunk);
         } else {
             if (error.response && error.response.data) {
                 return error.response.data;
@@ -106,15 +106,14 @@ async function refreshToken() {
 
 async function processChunks(filePath, token) {
     try {
-        const chunks = await readAccountFromCSV(filePath);
+        const chunks = await readOrderFromCSV(filePath);
         const results = [];
 
         for (let i = 0; i < chunks.length; i++) {
             const chunk = chunks[i];
-            const result = await postAccounts(token, chunk);
+            const result = await postErrorOrders(token, chunk);
             results.push(result);
         }
-
         return results;
     } catch (error) {
         console.error('Error processing chunks:', error);
@@ -122,12 +121,26 @@ async function processChunks(filePath, token) {
     }
 }
 
-export async function mainAccounts() {
+async function deleteNonHeaderLines(filePath) {
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return;
+        }
+        const clearedData = '';
+
+        fs.writeFile(filePath, clearedData, 'utf8', (err) => {
+            if (err) {
+                return;
+            }
+        });
+    });
+}
+
+export async function mainErrorOrders() {
     try {
         const token = await getTokenFromFile('token.json');
-        const filePath = `${READ_PATH}accounts.csv`;
-        const results = await processChunks(filePath, token);
-        
+        const filePath = `${READ_PATH}errorOrders.csv`;
+        const results = await processChunks(filePath, token);                
         const now = new Date();
         const day = now.getDate().toString().padStart(2, '0');
         const month = (now.getMonth() + 1).toString().padStart(2, '0');
@@ -135,28 +148,35 @@ export async function mainAccounts() {
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const formattedDate = `${day}-${month}-${year}-${hours}-${minutes}`;
-        const logFilePath = `${ACCOUNT_PATH}Accountlogs_${formattedDate}.csv`;
+        const logFilePath = `${ERROR_ORDER_PATH}orderlogs_${formattedDate}.csv`;
 
         const csvData = results.map((result, index) => {
             const data = result.map(item => [
                 item.result,
                 item.reason,
                 item.id,
-                item.customer_code,
-                item.credit_term,
-                item.credit_limit,
+                item.qb_sales_orders,
+                item.error_reason,
+                item.error_date,
                 formattedDate 
             ].join(',')).join(`\n`);
             return data;
         }).join(`\n`);
 
-        fs.writeFileSync(logFilePath, csvData);
-        console.log(`CSV log file written to ${logFilePath}`);
+        if (results.length > 0) {
+            fs.writeFileSync(logFilePath, csvData);
+            if (fs.existsSync(logFilePath)) {
+                console.log(`CSV log file written to ${logFilePath}`);
+                deleteNonHeaderLines(filePath);
+            } else {
+                console.log(`Error ${logFilePath}`);
+            }
+        }
     } catch (error) {
         console.error('Error in main:', error);
     }
 }
 
-// export { mainAccounts };
+// export { mainOrders };
 
-// mainAccounts();
+// mainOrders();

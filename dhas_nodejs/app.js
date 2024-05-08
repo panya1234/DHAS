@@ -3,8 +3,8 @@ import express from 'express';
 import { mainOrders } from './GetOrders.js';
 import { mainAccounts } from './PostAccounts.js';
 import { mainProducts } from './PostProducts.js';
-// import { mainGetToken } from './GetToken.js';
-import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_ACCOUNTS, JOB_SCHEDULE_PRODUCTS } from './config.js';
+import { mainErrorOrders } from './PostErrorOrders.js';
+import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_ACCOUNTS, JOB_SCHEDULE_PRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
 
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
@@ -36,11 +36,21 @@ const taskProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
     }
 });
 
+const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
+    try {
+        await mainErrorOrders();
+        // console.log('Products posted successfully.');
+    } catch (error) {
+        console.error('Error posting products:', error);
+        taskErrorOrders.stop();
+    }
+});
+
 const app = express();
-app.listen(8080, () => {
-    // mainGetToken();
+app.listen(8000, () => {
     mainOrders();
-    mainAccounts();
-    mainProducts();
+    // mainErrorOrders();
+    // mainAccounts();
+    // mainProducts();
     console.log('Server is running on port 8080');
 });

@@ -19,16 +19,16 @@ public class App {
         // Endpoint.publish("http://localhost:54321/CustomerAddRqSoapImpl", new CustomerAddRqSoapImpl());
         // System.out.print("Test CustomerAddRqSoapImpl");
 
-        Endpoint.publish("http://0.0.0.0:8000/GetItemInventoryQueryRq", new GetItemInventoryQueryRq());
+        Endpoint.publish("http://0.0.0.0:8080/GetItemInventoryQueryRq", new GetItemInventoryQueryRq());
         System.out.println("Test GetItemInventoryQueryRq");
 
-        Endpoint.publish("http://0.0.0.0:8000/GetCustomersQueryRq", new GetCustomersQueryRq());
+        Endpoint.publish("http://0.0.0.0:8080/GetCustomersQueryRq", new GetCustomersQueryRq());
         System.out.println("Test GetCustomersQueryRq");
 
-        Endpoint.publish("http://0.0.0.0:8000/AddSOPhilippines", new AddSOPhilippines());
+        Endpoint.publish("http://0.0.0.0:8080/AddSOPhilippines", new AddSOPhilippines());
         System.out.println("Test AddSOPhilippines");
 
-        Endpoint.publish("http://0.0.0.0:8000/AddSOIndonesia", new AddSOIndonesia());
+        Endpoint.publish("http://0.0.0.0:8080/AddSOIndonesia", new AddSOIndonesia());
         System.out.println("Test AddSOIndonesia");
     }
 } // or the version compatible with your JDK

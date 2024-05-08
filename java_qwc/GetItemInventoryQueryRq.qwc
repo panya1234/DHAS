@@ -2,7 +2,7 @@
 <QBWCXML>
  <AppName>GetItemInventoryQueryRq</AppName>
  <AppID></AppID>
- <AppURL>http://localhost:8000/GetItemInventoryQueryRq</AppURL>
+ <AppURL>http://localhost:8080/GetItemInventoryQueryRq</AppURL>
  <AppDescription>A short description for WCWebService1</AppDescription>
  <AppSupport>http://developer.intuit.com</AppSupport>
  <UserName>Admin</UserName>

@@ -2,7 +2,7 @@
 <QBWCXML>
  <AppName>AddSOIndonesia</AppName>
  <AppID></AppID>
- <AppURL>http://localhost:8000/AddSOIndonesia</AppURL>
+ <AppURL>http://localhost:8080/AddSOIndonesia</AppURL>
  <AppDescription>A short description for WCWebService1</AppDescription>
  <AppSupport>http://developer.intuit.com</AppSupport>
  <UserName>Admin</UserName>

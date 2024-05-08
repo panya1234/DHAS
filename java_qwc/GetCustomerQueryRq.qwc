@@ -2,7 +2,7 @@
 <QBWCXML>
  <AppName>GetCustomersQueryRq</AppName>
  <AppID></AppID>
- <AppURL>http://localhost:8000/GetCustomersQueryRq</AppURL>
+ <AppURL>http://localhost:8080/GetCustomersQueryRq</AppURL>
  <AppDescription>A short description for WCWebService1</AppDescription>
  <AppSupport>http://developer.intuit.com</AppSupport>
  <UserName>Admin</UserName>
