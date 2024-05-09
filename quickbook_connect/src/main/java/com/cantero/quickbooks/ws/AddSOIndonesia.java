@@ -202,7 +202,7 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\">");
         final String SO_FILE_PATH = "CSV/WRITE/Orders/Indonesia/ordersIN.csv";
-        final String SO_LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Indonesia/OrderItemsIn.csv";
+        final String SO_LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Indonesia/orderItemsIN.csv";
 
 
         try (CSVReader readerSO = new CSVReader(new FileReader(SO_FILE_PATH));
