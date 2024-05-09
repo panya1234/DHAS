@@ -1,17 +1,21 @@
-FROM node:21-alpine3.18
-
-RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
-
-WORKDIR /home/node/app
-
-COPY package*.json ./
-
-USER node
-
-RUN npm install
-
-COPY --chown=node:node . .
-
+# Create image based on the official Node image from dockerhub
+FROM node:lts-buster
+ 
+# Create app directory
+WORKDIR /usr/src/app
+ 
+# Copy dependency definitions
+COPY package.json ./package.json
+COPY package-lock.json ./package-lock.json
+ 
+# Install dependencies
+RUN npm ci
+ 
+# Get all the code needed to run the app
+COPY . .
+ 
+# Expose the port the app runs in
 EXPOSE 8000
-
-CMD [ "node", "app.js" ]
+ 
+# Serve the app
+CMD ["npm", "start"]
