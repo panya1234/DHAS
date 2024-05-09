@@ -49,8 +49,8 @@ const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
 const app = express();
 app.listen(8000, () => {
     mainOrders();
-    // mainErrorOrders();
-    // mainAccounts();
-    // mainProducts();
+    mainErrorOrders();
+    mainAccounts();
+    mainProducts();
     console.log('Server is running on port 8080');
 });
