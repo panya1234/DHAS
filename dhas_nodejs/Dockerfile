@@ -1,10 +1,17 @@
 FROM node:21-alpine3.18
-ENV NODE_ENV=production
-WORKDIR /usr/src/app
-COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
-RUN npm install --production --silent && mv node_modules ../
-COPY . .
-EXPOSE 8000
-RUN chown -R node /usr/src/app
+
+RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
+
+WORKDIR /home/node/app
+
+COPY package*.json ./
+
 USER node
-CMD ["node", "app.js"]
+
+RUN npm install
+
+COPY --chown=node:node . .
+
+EXPOSE 8000
+
+CMD [ "node", "app.js" ]
