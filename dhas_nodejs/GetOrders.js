@@ -156,7 +156,7 @@ async function exportToCSV(data) {
                 fileName = 'orderItemsNV.csv';
                 filePath = `${WRITE_PATH}North_Vietnam/${fileName}`;
             } else if (roleItemName.includes('South Vietnam')) {
-                fileName = 'orderItemssSV.csv';
+                fileName = 'orderItemsSV.csv';
                 filePath = `${WRITE_PATH}South_Vietnam/${fileName}`;
             }
 

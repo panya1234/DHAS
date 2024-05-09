@@ -69,7 +69,7 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
     @Override
     public int receiveResponseXML(String ticket, String response, String hresult, String message) {
         final String FILE_PATH = "CSV/WRITE/Orders/Philippines/ordersPH.csv";
-        final String LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/OrderItemsPH.csv";
+        final String LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/orderItemsPH.csv";
         final String ERROR_FILE_PATH = "CSV/READ/errorOrders.csv";
         // final String ERROR_LINE_ITEMS_FILE_PATH = "C:/DHAS/dhas_nodejs/CSV/WRITE/Orders/Error/OrderItemLogsPH.csv";
 
