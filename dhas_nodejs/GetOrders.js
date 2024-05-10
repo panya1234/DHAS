@@ -124,7 +124,7 @@ async function exportToCSV(data) {
             const records = ordersByRole[roleName].map(order => ({
                 Id: order.Id,
                 QBSalesOrders: order.QB_Sales_Orders__c,
-                CustomerName: order.Account.Customer_Code__c+"_"+order.Account.Name 
+                CustomerName: order.Account.Customer_Code__c+"_"+order.Retail_Store__r.Name 
             }));
             
             await csvWriter.writeRecords(records);
