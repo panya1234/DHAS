@@ -59,6 +59,7 @@ public class GetItemInventoryQueryRq implements QBWebConnectorSvcSoap {
      */
     @Override
     public int receiveResponseXML(String ticket, String response, String hresult, String message) {
+        // System.out.println(response);
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -70,15 +71,25 @@ public class GetItemInventoryQueryRq implements QBWebConnectorSvcSoap {
                 writer.writeNext(new String[]{"externalId", "productCost", "productStock"});
                 for (int i = 0; i < itemList.getLength(); i++) {
                     Element item = (Element) itemList.item(i);
-                    String listID = item.getElementsByTagName("ListID").item(0).getTextContent();
-                    // String[] parts = listID.split("-");
-                    // String externalId = parts[1];
+                    String Name = item.getElementsByTagName("Name").item(0).getTextContent();
+                    
+                    NodeList dataExtList = item.getElementsByTagName("DataExtRet");
+                    String currency = "";
+                    for (int j = 0; j < dataExtList.getLength(); j++) {
+                        Element dataExt = (Element) dataExtList.item(j);
+                        String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
+                        if (dataExtName.equals("Currency")) {
+                            currency = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                        }
+                    }
+                    String externalId = Name+currency;
+
                     String averageCost = item.getElementsByTagName("AverageCost").item(0).getTextContent();
                     String quantityOnHand = item.getElementsByTagName("QuantityOnHand").item(0).getTextContent();
                     String quantityOnSalesOrder = item.getElementsByTagName("QuantityOnSalesOrder").item(0).getTextContent();
                     int stock = Integer.parseInt(quantityOnHand) - Integer.parseInt(quantityOnSalesOrder);
                     String stockAsString = String.valueOf(stock);
-                    writer.writeNext(new String[]{listID, averageCost, stockAsString});
+                    writer.writeNext(new String[]{externalId, averageCost, stockAsString});
                 }
                 System.out.println("products.csv file created successfully.");
             } catch (IOException e) {
@@ -96,7 +107,7 @@ public class GetItemInventoryQueryRq implements QBWebConnectorSvcSoap {
                                  int qbXMLMinorVers) {
         //Example qbXML to Query for an Item
         //http://www.consolibyte.com/wiki/doku.php/quickbooks_qbxml_itemquery
-        String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><ItemInventoryQueryRq requestID=\"1\"></ItemInventoryQueryRq></QBXMLMsgsRq></QBXML>";
+        String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><ItemInventoryQueryRq requestID=\"2\"><OwnerID>0</OwnerID></ItemInventoryQueryRq></QBXMLMsgsRq></QBXML>";
         return query;
     }
 

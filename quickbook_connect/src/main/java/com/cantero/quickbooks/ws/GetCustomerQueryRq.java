@@ -59,6 +59,7 @@ public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
      */
     @Override
     public int receiveResponseXML(String ticket, String response, String hresult, String message) {
+        // System.out.println(response);
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -69,22 +70,31 @@ public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
             try (CSVWriter writer = new CSVWriter(new FileWriter("CSV/READ/accounts.csv"))) {
                 writer.writeNext(new String[]{"CustomerCode", "CreditLimit", "CreditTerm"});
                 for (int i = 0; i < customerList.getLength(); i++) {
-                    Element item = (Element) customerList.item(i);
-                    String listID = item.getElementsByTagName("ListID").item(0).getTextContent();
-                    // String[] parts = listID.split("-");
-                    // String customerCode = parts[1];
-                    String creditLimit = "0";
-                    NodeList creditLimitTag = item.getElementsByTagName("CreditLimit");
-                    if (creditLimitTag.getLength() > 0) {
-                        creditLimit = item.getElementsByTagName("CreditLimit").item(0).getTextContent();
+                    Element customer = (Element) customerList.item(i);
+                    NodeList dataExtList = customer.getElementsByTagName("DataExtRet");
+                    String customerCode = "";
+                    for (int j = 0; j < dataExtList.getLength(); j++) {
+                        Element dataExt = (Element) dataExtList.item(j);
+                        String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
+                        if (dataExtName.equals("Customer Code")) {
+                            customerCode = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                        }
                     }
+
+                    String creditLimit = "0";
+                    NodeList creditLimitTag = customer.getElementsByTagName("CreditLimit");
+                    if (creditLimitTag.getLength() > 0) {
+                        creditLimit = creditLimitTag.item(0).getTextContent();
+                    }
+
                     String termsFullName = "";
-                    NodeList termsRefList = item.getElementsByTagName("TermsRef");
+                    NodeList termsRefList = customer.getElementsByTagName("TermsRef");
                     if (termsRefList.getLength() > 0) {
                         Element termsRef = (Element) termsRefList.item(0);
                         termsFullName = termsRef.getElementsByTagName("FullName").item(0).getTextContent();
                     }
-                    writer.writeNext(new String[]{listID, creditLimit, termsFullName});
+                    
+                    writer.writeNext(new String[]{customerCode, creditLimit, termsFullName});
                 }
                 System.out.println("accounts.csv file created successfully.");
             } catch (IOException e) {
@@ -97,13 +107,14 @@ public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
     }
 
 
+
     @Override
     public String sendRequestXML(String ticket, String strHCPResponse,
                                  String strCompanyFileName, String qbXMLCountry, int qbXMLMajorVers,
                                  int qbXMLMinorVers) {
         //Example qbXML to Query for an Item
         //http://www.consolibyte.com/wiki/doku.php/quickbooks_qbxml_itemquery
-        String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><CustomerQueryRq requestID=\"1\"></CustomerQueryRq ></QBXMLMsgsRq></QBXML>";
+        String query = "<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"7.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\"><CustomerQueryRq requestID=\"2\"><OwnerID>0</OwnerID></CustomerQueryRq></QBXMLMsgsRq></QBXML>";
         return query;
     }
 
