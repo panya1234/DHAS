@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <QBWCXML>
- <AppName>GetCustomerQueryRq</AppName>
+ <AppName>GetCustomerQueryIndonesia</AppName>
  <AppID></AppID>
  <AppURL>https://apiqbook.dhas.com/GetCustomerQueryRq</AppURL>
- <AppDescription>A short description for WCWebService1</AppDescription>
+ <AppDescription>A short description for Indonesia</AppDescription>
  <AppSupport>https://apiqbook.dhas.com/GetCustomerQueryRq</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>
