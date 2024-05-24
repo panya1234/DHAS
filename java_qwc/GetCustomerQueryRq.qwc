@@ -2,9 +2,9 @@
 <QBWCXML>
  <AppName>GetCustomerQueryRq</AppName>
  <AppID></AppID>
- <AppURL>https://dev-apiqbook.dhas.com/GetCustomerQueryRq</AppURL>
+ <AppURL>https://apiqbook.dhas.com/GetCustomerQueryRq</AppURL>
  <AppDescription>A short description for WCWebService1</AppDescription>
- <AppSupport>https://dev-apiqbook.dhas.com/GetCustomerQueryRq</AppSupport>
+ <AppSupport>https://apiqbook.dhas.com/GetCustomerQueryRq</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>
  <OwnerID>{57F3B9B1-86F1-4fcc-B1EE-566DE1813D21}</OwnerID>
