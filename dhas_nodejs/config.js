@@ -17,7 +17,7 @@ const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
 
 // oauth2 info
 const USERNAME = 'panyakan@ignite-idea.com.partialuat';
-const PASSWORD = 'IgniteIdea123456';
+const PASSWORD = 'Admin123456789';
 const GRANT_TYPE = 'password';
 const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
 const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
