@@ -238,8 +238,8 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                     queryBuilder.append("<SalesOrderLineAdd>");
                     queryBuilder.append("<ItemRef><FullName>").append(itemName).append("</FullName></ItemRef>");
                     queryBuilder.append("<Quantity>").append(quantity).append("</Quantity>");
-                    queryBuilder.append("<SalesPrice>").append(unitPrice).append("</SalesPrice>");
-                    queryBuilder.append("<PurchaseCost>").append(listPrice).append("</PurchaseCost>");
+                    queryBuilder.append("<Rate>").append(unitPrice).append("</Rate>");
+                    queryBuilder.append("<Amount>").append(listPrice).append("</Amount>");
                     // queryBuilder.append("<UnitOfMeasureSetRef><FullName>").append(salesUM).append("</FullName></UnitOfMeasureSetRef>");
                     queryBuilder.append("</SalesOrderLineAdd>");
                 }
