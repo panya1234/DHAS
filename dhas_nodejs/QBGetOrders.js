@@ -168,7 +168,9 @@ async function exportToCSV(data) {
                     { id: 'ProductCode', title: 'Product Code' },
                     { id: 'ExternalId', title: 'External Id' },
                     { id: 'Quantity', title: 'Quantity' },
-                    { id: 'SalesUM', title: 'Sales U/M' }
+                    { id: 'SalesUM', title: 'Sales U/M' },
+                    { id: 'UnitPrice', title: 'UnitPrice' },
+                    { id: 'ListPrice', title: 'ListPrice' }
                 ],
                 append: hasFile
             });
@@ -178,7 +180,9 @@ async function exportToCSV(data) {
                 ProductCode: orderLine.Product2.ProductCode,
                 ExternalId: orderLine.Product2.ExternalId__c,
                 Quantity: orderLine.Quantity,
-                SalesUM: orderLine.Product2.Sales_U_M__c
+                SalesUM: orderLine.Product2.Sales_U_M__c,
+                UnitPrice: orderLine.UnitPrice,
+                ListPrice: orderLine.ListPrice
             }));
 
             await csvWriter.writeRecords(records);
