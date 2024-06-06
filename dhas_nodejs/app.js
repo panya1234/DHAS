@@ -1,9 +1,9 @@
 import cron from 'node-cron';
 import express from 'express';
-import { mainOrders } from './GetOrders.js';
-import { mainAccounts } from './PostAccounts.js';
-import { mainProducts } from './PostProducts.js';
-import { mainErrorOrders } from './PostErrorOrders.js';
+import { mainOrders } from './QBGetOrders.js';
+import { mainAccounts } from './QBPostAccounts.js';
+import { mainProducts } from './QBPostProducts.js';
+import { mainErrorOrders } from './QBPostErrorOrders.js';
 import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_ACCOUNTS, JOB_SCHEDULE_PRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
 
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
