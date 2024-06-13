@@ -68,7 +68,7 @@ public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
 
             NodeList customerList = document.getElementsByTagName("CustomerRet");
             try (CSVWriter writer = new CSVWriter(new FileWriter("CSV/READ/accounts.csv"))) {
-                writer.writeNext(new String[]{"CustomerCode", "CreditLimit", "CreditTerm"});
+                writer.writeNext(new String[]{"CustomerCode", "CreditLimit", "CreditTerm", "QBListID"});
                 for (int i = 0; i < customerList.getLength(); i++) {
                     Element customer = (Element) customerList.item(i);
                     NodeList dataExtList = customer.getElementsByTagName("DataExtRet");
@@ -93,8 +93,9 @@ public class GetCustomerQueryRq implements QBWebConnectorSvcSoap {
                         Element termsRef = (Element) termsRefList.item(0);
                         termsFullName = termsRef.getElementsByTagName("FullName").item(0).getTextContent();
                     }
-                    
-                    writer.writeNext(new String[]{customerCode, creditLimit, termsFullName});
+
+                    String qbListID = customer.getElementsByTagName("ListID").item(0).getTextContent();
+                    writer.writeNext(new String[]{customerCode, creditLimit, termsFullName, qbListID});
                 }
                 System.out.println("accounts.csv file created successfully.");
             } catch (IOException e) {

@@ -145,6 +145,7 @@ export async function mainAccounts() {
                 item.customer_code,
                 item.credit_term,
                 item.credit_limit,
+                item.qb_list_id,
                 formattedDate 
             ].join(',')).join(`\n`);
             return data;

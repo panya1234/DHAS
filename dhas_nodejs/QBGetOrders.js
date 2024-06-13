@@ -115,7 +115,7 @@ async function exportToCSV(data) {
                 path: filePath,
                 header: [
                     { id: 'Id', title: 'Order Id' },
-                    { id: 'CustomerName', title: 'Customer Code c' },
+                    { id: 'QBListID', title: 'QBListID' },
                     { id: 'QBSalesOrders', title: 'QBSales Order' }
                 ],
                 append: hasFile,
@@ -125,7 +125,7 @@ async function exportToCSV(data) {
             const records = ordersByRole[roleName].map(order => ({
                 Id: order.Id,
                 QBSalesOrders: order.QB_Sales_Orders__c,
-                CustomerName: order.Account.Customer_Code__c+"_"+order.Retail_Store__r.Name 
+                QBListID: order.Account.QB_List_ID__c
             }));
             
             await csvWriter.writeRecords(records);
