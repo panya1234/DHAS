@@ -2,7 +2,7 @@ import axios from 'axios';
 import fs from 'fs';
 import { createObjectCsvWriter } from 'csv-writer';
 import qs from 'qs';
-import { WRITE_PATH } from './config.js';
+import { WRITE_PATH , URL, URL_TOKEN } from './config.js';
 import { USERNAME, PASSWORD, GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
 
 async function getTokenFromFile(filePath) {
@@ -24,7 +24,7 @@ async function getTokenFromFile(filePath) {
 
 async function getOrders(token, offset) {
     try {
-        const response = await axios.get('https://flow-dream-5899--partialuat.sandbox.my.salesforce.com/services/apexrest/object/orders', {
+        const response = await axios.get(`${URL}/services/apexrest/object/orders`, {
             params: {
                 Limit: 1000,
                 Offset: offset
@@ -56,7 +56,7 @@ async function getOrders(token, offset) {
 
 async function refreshToken() {
     try {
-        const response = await axios.post('https://test.salesforce.com/services/oauth2/token',
+        const response = await axios.post(`${URL_TOKEN}/services/oauth2/token`,
             qs.stringify({
                 username: USERNAME,
                 password: PASSWORD,
@@ -118,7 +118,8 @@ async function exportToCSV(data) {
                     { id: 'CustomerName', title: 'Customer Code c' },
                     { id: 'QBSalesOrders', title: 'QBSales Order' }
                 ],
-                append: hasFile 
+                append: hasFile,
+                alwaysQuote: true
             });
 
             const records = ordersByRole[roleName].map(order => ({
@@ -172,7 +173,8 @@ async function exportToCSV(data) {
                     { id: 'UnitPrice', title: 'UnitPrice' },
                     { id: 'ListPrice', title: 'ListPrice' }
                 ],
-                append: hasFile
+                append: hasFile,
+                alwaysQuote: true
             });
 
             const records = orderItemsByRole[roleItemName].map(orderLine => ({

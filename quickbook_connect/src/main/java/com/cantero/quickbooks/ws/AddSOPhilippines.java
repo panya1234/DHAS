@@ -3,6 +3,8 @@ package com.cantero.quickbooks.ws;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.HashMap;
+
 import javax.jws.WebService;
 
 import java.io.FileWriter;
@@ -20,13 +22,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-import com.opencsv.CSVWriter;
 import com.opencsv.exceptions.CsvException;
 
 import java.io.File;
 import java.io.FileReader;
 import java.util.List;
+import java.util.Map;
+
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.CSVWriterBuilder;
 
 /*
  * http://developer.intuit.com/qbsdk-current/doc/pdf/qbwc_proguide.pdf
@@ -110,11 +116,11 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
                         }
                     }
         
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH));
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH));
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
                 } else {
@@ -154,11 +160,11 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
                         }
                     }
 
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH));
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH));
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
                     

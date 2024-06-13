@@ -116,11 +116,11 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                         }
                     }
         
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH));
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH));
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
                 } else {
@@ -160,11 +160,11 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                         }
                     }
 
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_PATH));
                     writerOrders.writeAll(allRows);
                     writerOrders.close();
 
-                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH), ',', CSVWriter.NO_QUOTE_CHARACTER, CSVWriter.NO_ESCAPE_CHARACTER, CSVWriter.DEFAULT_LINE_END);
+                    CSVWriter writerItems = new CSVWriter(new FileWriter(LINE_ITEMS_FILE_PATH));
                     writerItems.writeAll(allItemRows);
                     writerItems.close();
 
@@ -252,5 +252,4 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
         // System.out.println(queryBuilder.toString());
         return queryBuilder.toString();
     }
-
 }

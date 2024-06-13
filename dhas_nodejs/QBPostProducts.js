@@ -2,7 +2,7 @@ import axios from "axios";
 import fs from 'fs';
 import csv from 'csv-parser';
 import qs from 'qs';
-import { READ_PATH, PRODUCT_PATH } from './config.js';
+import { READ_PATH, PRODUCT_PATH, URL, URL_TOKEN } from './config.js';
 import { USERNAME, PASSWORD, GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
 
 async function readProductsFromCSV(filePath) {
@@ -53,7 +53,7 @@ async function getTokenFromFile(filePath) {
 
 async function postProducts(token, chunk) {
     try {
-        const response = await axios.post('https://flow-dream-5899--partialuat.sandbox.my.salesforce.com/services/apexrest/object/products',
+        const response = await axios.post(`${URL}/services/apexrest/object/products`,
         chunk,
             {
                 headers: {
@@ -82,7 +82,7 @@ async function postProducts(token, chunk) {
 
 async function refreshToken() {
     try {
-        const response = await axios.post('https://test.salesforce.com/services/oauth2/token',
+        const response = await axios.post(`${URL_TOKEN}/services/oauth2/token`,
             qs.stringify({
                 username: USERNAME,
                 password: PASSWORD,
