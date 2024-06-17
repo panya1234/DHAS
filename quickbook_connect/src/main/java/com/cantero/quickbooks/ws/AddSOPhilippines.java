@@ -221,7 +221,7 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
 
             queryBuilder.append("<SalesOrderAddRq requestID=\"2\">");
             queryBuilder.append("<SalesOrderAdd>");
-            queryBuilder.append("<CustomerRef><FullName>").append(listID).append("</FullName></CustomerRef>");
+            queryBuilder.append("<CustomerRef><ListID>").append(listID).append("</ListID></CustomerRef>");
             queryBuilder.append("<TemplateRef><FullName>SALES ORDER</FullName></TemplateRef>");
             queryBuilder.append("<RefNumber>").append(SOnumber).append("</RefNumber>");
             
