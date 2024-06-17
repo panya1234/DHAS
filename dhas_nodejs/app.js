@@ -50,7 +50,7 @@ const app = express();
 app.listen(8000, () => {
     mainOrders();
     // mainErrorOrders();
-    // mainAccounts();
+    mainAccounts();
     // mainProducts();
     console.log('Server is running on port 8080');
 });
