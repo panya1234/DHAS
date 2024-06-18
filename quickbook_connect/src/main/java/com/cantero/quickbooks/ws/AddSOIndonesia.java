@@ -252,7 +252,7 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
         }
 
         queryBuilder.append("</QBXMLMsgsRq></QBXML>");
-        // System.out.println(queryBuilder.toString());
+        System.out.println(queryBuilder.toString());
         return queryBuilder.toString();
     }
 }
