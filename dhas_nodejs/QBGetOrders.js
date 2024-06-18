@@ -197,7 +197,7 @@ async function exportToCSV(data) {
 // const args = process.argv.slice(2);
 // const offset = args[0];
 
-async function mainOrders(offset) {
+export async function mainOrders(offset) {
     try {
         const token = await getTokenFromFile('sftoken.json');
         let orders = await getOrders(token, offset);
@@ -211,4 +211,4 @@ async function mainOrders(offset) {
 
 // export { mainOrders };
 
-mainOrders();
+// mainOrders();
