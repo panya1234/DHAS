@@ -68,16 +68,16 @@ public class GetPHPCustomer implements QBWebConnectorSvcSoap {
 
             NodeList customerList = document.getElementsByTagName("CustomerRet");
             try (CSVWriter writer = new CSVWriter(new FileWriter("CSV/READ/accounts.csv"))) {
-                writer.writeNext(new String[]{"CustomerCode", "CreditLimit", "CreditTerm", "QBListID"});
+                writer.writeNext(new String[]{"ExternalId", "CreditLimit", "CreditTerm", "QBListID"});
                 for (int i = 0; i < customerList.getLength(); i++) {
                     Element customer = (Element) customerList.item(i);
                     NodeList dataExtList = customer.getElementsByTagName("DataExtRet");
-                    String customerCode = "";
+                    String externalId = "";
                     for (int j = 0; j < dataExtList.getLength(); j++) {
                         Element dataExt = (Element) dataExtList.item(j);
                         String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
-                        if (dataExtName.equals("Customer Code")) {
-                            customerCode = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                        if (dataExtName.equals("QB External ID")) {
+                            externalId = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
                         }
                     }
 
@@ -95,7 +95,7 @@ public class GetPHPCustomer implements QBWebConnectorSvcSoap {
                     }
 
                     String qbListID = customer.getElementsByTagName("ListID").item(0).getTextContent();
-                    writer.writeNext(new String[]{customerCode, creditLimit, termsFullName, qbListID});
+                    writer.writeNext(new String[]{externalId, creditLimit, termsFullName, qbListID});
                 }
                 System.out.println("PHPaccounts.csv file created successfully.");
             } catch (IOException e) {

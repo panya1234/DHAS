@@ -1,8 +1,11 @@
 // time to work
 const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
 const JOB_SCHEDULE_ERROR_ORDERS = '*/3 * * * *';
-const JOB_SCHEDULE_ACCOUNTS = '30 4 * * *';
-const JOB_SCHEDULE_PRODUCTS = '30 4 * * *';
+const JOB_SCHEDULE_INACCOUNTS = '30 4 * * *';
+const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
+
+const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
+const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
 // path csv
 const READ_PATH = '/usr/src/app/CSV/READ/';
@@ -47,8 +50,12 @@ export { CLIENT_SECRET };
 
 export { JOB_SCHEDULE_ORDERS };
 export { JOB_SCHEDULE_ERROR_ORDERS };
-export { JOB_SCHEDULE_ACCOUNTS };
-export { JOB_SCHEDULE_PRODUCTS };
+
+export { JOB_SCHEDULE_INACCOUNTS };
+export { JOB_SCHEDULE_INPRODUCTS };
+
+export { JOB_SCHEDULE_PHPACCOUNTS };
+export { JOB_SCHEDULE_PHPPRODUCTS };
 
 export { READ_PATH };
 export { WRITE_PATH };

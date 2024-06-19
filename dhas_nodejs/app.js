@@ -1,8 +1,10 @@
 import cron from 'node-cron';
 import express from 'express';
 import { mainOrders } from './QBGetOrders.js';
-import { mainAccounts } from './QBPostAccounts.js';
-import { mainProducts } from './QBPostProducts.js';
+import { mainINAccounts } from './QBPostINAccounts.js';
+import { mainINProducts } from './QBPostINProducts.js';
+import { mainPHPAccounts } from './QBPostPHPAccounts.js';
+import { mainPHPProducts } from './QBPostPHPProducts.js';
 import { mainErrorOrders } from './QBPostErrorOrders.js';
 import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_ACCOUNTS, JOB_SCHEDULE_PRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
 
@@ -16,23 +18,43 @@ const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     }
 });
 
-const taskAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
+const taskINAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
     try {
-        await mainProducts()
+        await mainINAccounts()
         // console.log('Accounts posted successfully.');
     } catch (error) {
         console.error('Error posting accounts:', error);
-        taskAccounts.stop();
+        taskINAccounts.stop();
     }
 });
 
-const taskProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
+const taskINProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
     try {
-        await mainAccounts();
+        await mainINProducts();
         // console.log('Products posted successfully.');
     } catch (error) {
         console.error('Error posting products:', error);
-        taskProducts.stop();
+        taskINProducts.stop();
+    }
+});
+
+const taskPHPAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
+    try {
+        await mainPHPAccounts()
+        // console.log('Accounts posted successfully.');
+    } catch (error) {
+        console.error('Error posting accounts:', error);
+        taskPHPAccounts.stop();
+    }
+});
+
+const taskPHPProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
+    try {
+        await mainPHPProducts();
+        // console.log('Products posted successfully.');
+    } catch (error) {
+        console.error('Error posting products:', error);
+        taskPHPProducts.stop();
     }
 });
 
@@ -50,7 +72,8 @@ const app = express();
 app.listen(8000, () => {
     mainOrders();
     // mainErrorOrders();
-    mainAccounts();
+    mainINAccounts();
+    mainPHPAccounts();
     // mainProducts();
     console.log('Server is running on port 8080');
 });
