@@ -74,15 +74,14 @@ public class GetItemInventoryQueryRq implements QBWebConnectorSvcSoap {
                     String Name = item.getElementsByTagName("Name").item(0).getTextContent();
                     
                     NodeList dataExtList = item.getElementsByTagName("DataExtRet");
-                    String currency = "";
+                    String externalId = "";
                     for (int j = 0; j < dataExtList.getLength(); j++) {
                         Element dataExt = (Element) dataExtList.item(j);
                         String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
-                        if (dataExtName.equals("Currency")) {
-                            currency = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                        if (dataExtName.equals("External ID")) {
+                            externalId = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
                         }
                     }
-                    String externalId = Name+currency;
 
                     String averageCost = item.getElementsByTagName("AverageCost").item(0).getTextContent();
                     String quantityOnHand = item.getElementsByTagName("QuantityOnHand").item(0).getTextContent();
