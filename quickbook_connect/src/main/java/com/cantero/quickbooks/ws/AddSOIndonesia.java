@@ -222,7 +222,7 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
             queryBuilder.append("<SalesOrderAddRq requestID=\"2\">");
             queryBuilder.append("<SalesOrderAdd>");
             queryBuilder.append("<CustomerRef><ListID>").append(listID).append("</ListID></CustomerRef>");
-            queryBuilder.append("<TemplateRef><FullName>SALES ORDER</FullName></TemplateRef>");
+            queryBuilder.append("<TemplateRef><FullName>SALE ORDER</FullName></TemplateRef>");
             queryBuilder.append("<RefNumber>").append(SOnumber).append("</RefNumber>");
             
             for (int k = 0; k < allItemRows.size(); k++) {
