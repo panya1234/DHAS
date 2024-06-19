@@ -1,10 +1,9 @@
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CloseConnectionResponse.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ObjectFactory.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\package-info.java
-C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetItemInventoryQueryRq.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\SendRequestXMLResponse.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ReceiveResponseXMLResponse.java
-C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetCustomerQueryRq.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetINCustomer.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ArrayOfString.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CSVWriterSettings.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\Authenticate.java
@@ -13,6 +12,8 @@ C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\q
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CustomerAddRqSoapImpl.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\SendRequestXML.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CloseConnection.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetINItemInventory.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetPHPItemInventory.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\AddSOIndonesia.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\AddSOPhilippines.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ConnectionErrorResponse.java
@@ -24,3 +25,4 @@ C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\q
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\QBWebConnectorSvc.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ReceiveResponseXML.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\QBWebConnectorSvcSoap.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetPHPCustomer.java
