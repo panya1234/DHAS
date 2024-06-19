@@ -1,7 +1,7 @@
 // time to work
 const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
 const JOB_SCHEDULE_ERROR_ORDERS = '*/3 * * * *';
-const JOB_SCHEDULE_ACCOUNTS = '*/1 * * * *';
+const JOB_SCHEDULE_ACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PRODUCTS = '30 4 * * *';
 
 // path csv
