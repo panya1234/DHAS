@@ -7,7 +7,7 @@
  <AppSupport>https://apiqbook.dhas.com/GetINCustomer</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>
- <OwnerID>{57F3B9B1-86F1-4fcc-B1EE-566DE1813D83}</OwnerID>
+ <OwnerID>{57F3B9B1-86F1-4fcc-B1EE-566DE1813D73}</OwnerID>
  <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1ED}</FileID>
  <QBType>QBFS</QBType>
  <Scheduler>
