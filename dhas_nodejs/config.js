@@ -27,7 +27,7 @@ const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
 // oauth2 info
 //sandbox
 const URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
-const URL_TOKEN = 'https://test.salesforce.com';
+const URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 
 const USERNAME = 'panyakan@ignite-idea.com.partialuat';
 const PASSWORD = 'Admin123456789';
@@ -37,7 +37,7 @@ const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99
 
 //production
 // const URL = 'https://flow-dream-5899.my.salesforce.com';
-// const URL_TOKEN = 'https://login.salesforce.com';
+// const URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
 
 // const USERNAME = 'bowonwit@dev-dhas.com';
 // const PASSWORD = 'IgniteIdea@123456';
