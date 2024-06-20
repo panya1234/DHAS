@@ -6,7 +6,7 @@ import { mainINProducts } from './QBPostINProducts.js';
 import { mainPHPAccounts } from './QBPostPHPAccounts.js';
 import { mainPHPProducts } from './QBPostPHPProducts.js';
 import { mainErrorOrders } from './QBPostErrorOrders.js';
-import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_ACCOUNTS, JOB_SCHEDULE_PRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
+import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_INACCOUNTS, JOB_SCHEDULE_PHPACCOUNTS, JOB_SCHEDULE_INPRODUCTS, JOB_SCHEDULE_PHPPRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
 
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
@@ -18,7 +18,7 @@ const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     }
 });
 
-const taskINAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
+const taskINAccounts = cron.schedule(JOB_SCHEDULE_INACCOUNTS, async () => {
     try {
         await mainINAccounts()
         // console.log('Accounts posted successfully.');
@@ -28,7 +28,7 @@ const taskINAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
     }
 });
 
-const taskINProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
+const taskINProducts = cron.schedule(JOB_SCHEDULE_INPRODUCTS, async () => {
     try {
         await mainINProducts();
         // console.log('Products posted successfully.');
@@ -38,7 +38,7 @@ const taskINProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
     }
 });
 
-const taskPHPAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
+const taskPHPAccounts = cron.schedule(JOB_SCHEDULE_PHPACCOUNTS, async () => {
     try {
         await mainPHPAccounts()
         // console.log('Accounts posted successfully.');
@@ -48,7 +48,7 @@ const taskPHPAccounts = cron.schedule(JOB_SCHEDULE_ACCOUNTS, async () => {
     }
 });
 
-const taskPHPProducts = cron.schedule(JOB_SCHEDULE_PRODUCTS, async () => {
+const taskPHPProducts = cron.schedule(JOB_SCHEDULE_PHPPRODUCTS, async () => {
     try {
         await mainPHPProducts();
         // console.log('Products posted successfully.');
