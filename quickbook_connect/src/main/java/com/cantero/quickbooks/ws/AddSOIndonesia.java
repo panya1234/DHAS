@@ -232,6 +232,8 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                     String quantity = row[3];
                     String unit = row[4];
                     String unitPrice = row[5];
+                    double price = Double.parseDouble(unitPrice);
+                    String formattedPrice = String.format("%.2f", price);
                     String listPrice = row[6];
 
                     queryBuilder.append("<SalesOrderLineAdd>");
@@ -240,7 +242,7 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                         queryBuilder.append("<Quantity>").append(quantity).append("</Quantity>");
                     }
                     queryBuilder.append("<UnitOfMeasure>").append(unit).append("</UnitOfMeasure>");
-                    queryBuilder.append("<Rate>").append(unitPrice).append("</Rate>");
+                    queryBuilder.append("<Rate>").append(formattedPrice).append("</Rate>");
                     queryBuilder.append("<DataExt><OwnerID>0</OwnerID><DataExtName>Unit Price</DataExtName><DataExtValue>").append(listPrice).append("</DataExtValue></DataExt>");
                     queryBuilder.append("</SalesOrderLineAdd>");
                 }
