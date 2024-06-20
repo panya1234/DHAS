@@ -67,7 +67,7 @@ public class GetPHPCustomer implements QBWebConnectorSvcSoap {
             Document document = builder.parse(is);
 
             NodeList customerList = document.getElementsByTagName("CustomerRet");
-            try (CSVWriter writer = new CSVWriter(new FileWriter("CSV/READ/accounts.csv"))) {
+            try (CSVWriter writer = new CSVWriter(new FileWriter("CSV/READ/PHPaccounts.csv"))) {
                 writer.writeNext(new String[]{"ExternalId", "CreditLimit", "CreditTerm", "QBListID"});
                 for (int i = 0; i < customerList.getLength(); i++) {
                     Element customer = (Element) customerList.item(i);
