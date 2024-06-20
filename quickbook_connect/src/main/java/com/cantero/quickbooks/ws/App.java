@@ -20,23 +20,23 @@ public class App {
         // System.out.print("Test CustomerAddRqSoapImpl");
 
         System.out.println("--Indonesia--");
-        Endpoint.publish("http://localhost:8000/AddSOIndonesia", new AddSOIndonesia());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/AddSOIndonesia", new AddSOIndonesia());
         System.out.println("AddSOIndonesia ");
 
-        Endpoint.publish("http://localhost:8000/GetINItemInventory", new GetINItemInventory());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/GetINItemInventory", new GetINItemInventory());
         System.out.println("GetINItemInventory ");
 
-        Endpoint.publish("http://localhost:8000/GetINCustomer", new GetINCustomer());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/GetINCustomer", new GetINCustomer());
         System.out.println("GetINCustomer ");
 
         System.out.println("--Philippines--");
-        Endpoint.publish("http://localhost:8000/AddSOPhilippines", new AddSOPhilippines());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/AddSOPhilippines", new AddSOPhilippines());
         System.out.println("AddSOPhilippines ");
 
-        Endpoint.publish("http://localhost:8000/GetPHPItemInventory", new GetPHPItemInventory());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/GetPHPItemInventory", new GetPHPItemInventory());
         System.out.println("GetPHPItemInventory ");
 
-        Endpoint.publish("http://localhost:8000/GetPHPCustomer", new GetPHPCustomer());
+        Endpoint.publish("http://dev-apiqbook.dhas.com/GetPHPCustomer", new GetPHPCustomer());
         System.out.println("GetPHPCustomer ");
     }
 } // or the version compatible with your JDK
