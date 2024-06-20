@@ -1,17 +1,17 @@
 // time to work
 const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
 const JOB_SCHEDULE_ERROR_ORDERS = '*/3 * * * *';
-// const JOB_SCHEDULE_INACCOUNTS = '30 4 * * *';
-// const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
+const JOB_SCHEDULE_INACCOUNTS = '30 4 * * *';
+const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
 
-// const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
-// const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
+const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
+const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
-const JOB_SCHEDULE_INACCOUNTS = '*/5 * * * *';
-const JOB_SCHEDULE_INPRODUCTS = '*/5 * * * *';
+// const JOB_SCHEDULE_INACCOUNTS = '*/5 * * * *';
+// const JOB_SCHEDULE_INPRODUCTS = '*/5 * * * *';
 
-const JOB_SCHEDULE_PHPACCOUNTS = '*/5 * * * *';
-const JOB_SCHEDULE_PHPPRODUCTS = '*/5 * * * *';
+// const JOB_SCHEDULE_PHPACCOUNTS = '*/5 * * * *';
+// const JOB_SCHEDULE_PHPPRODUCTS = '*/5 * * * *';
 
 // path csv
 const READ_PATH = '/usr/src/app/CSV/READ/';
