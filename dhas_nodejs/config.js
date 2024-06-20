@@ -31,7 +31,7 @@ const URL_TOKEN = 'https://test.salesforce.com';
 
 const USERNAME = 'panyakan@ignite-idea.com.partialuat';
 const PASSWORD = 'Admin123456789';
-const GRANT_TYPE = 'password';
+const GRANT_TYPE = 'client_credentials';
 const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
 const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
 
@@ -41,7 +41,7 @@ const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99
 
 // const USERNAME = 'bowonwit@dev-dhas.com';
 // const PASSWORD = 'IgniteIdea@123456';
-// const GRANT_TYPE = 'password';
+// const GRANT_TYPE = 'client_credentials';
 // const CLIENT_ID = '3MVG95mg0lk4batj7J4KCkLZHEHITnr3x_gKU2htHWqUhqQsqZEsIjW1hNfuctSWXnd1e71EQRDOudqysZmTr';
 // const CLIENT_SECRET = '4866734FA62C03DB4CD10BD81E047D609D141913DA4BCB9A920C8A99421A15A8';
 

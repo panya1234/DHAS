@@ -3,7 +3,7 @@ import fs from 'fs';
 import { createObjectCsvWriter } from 'csv-writer';
 import qs from 'qs';
 import { WRITE_PATH , URL, URL_TOKEN } from './config.js';
-import { USERNAME, PASSWORD, GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
+import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
 
 async function getTokenFromFile(filePath) {
     return new Promise((resolve, reject) => {
@@ -58,8 +58,6 @@ async function refreshToken() {
     try {
         const response = await axios.post(`${URL_TOKEN}/services/oauth2/token`,
             qs.stringify({
-                username: USERNAME,
-                password: PASSWORD,
                 grant_type: GRANT_TYPE,
                 client_id: CLIENT_ID,
                 client_secret: CLIENT_SECRET
