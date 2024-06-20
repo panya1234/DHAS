@@ -73,13 +73,16 @@ public class GetPHPCustomer implements QBWebConnectorSvcSoap {
                     Element customer = (Element) customerList.item(i);
                     NodeList dataExtList = customer.getElementsByTagName("DataExtRet");
                     String externalId = "";
+                    String customerCode = "";
+
                     for (int j = 0; j < dataExtList.getLength(); j++) {
                         Element dataExt = (Element) dataExtList.item(j);
                         String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
                         if (dataExtName.equals("QB External ID")) {
-                            externalId = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                            customerCode = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
                         }
                     }
+                    externalId = customerCode + "PHP";
 
                     String creditLimit = "0";
                     NodeList creditLimitTag = customer.getElementsByTagName("CreditLimit");
