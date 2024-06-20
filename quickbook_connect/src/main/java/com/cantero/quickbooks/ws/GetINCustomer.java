@@ -79,7 +79,7 @@ public class GetINCustomer implements QBWebConnectorSvcSoap {
                         Element dataExt = (Element) dataExtList.item(j);
                         String dataExtName = dataExt.getElementsByTagName("DataExtName").item(0).getTextContent();
                         if (dataExtName.equals("Customer Code")) {
-                            externalId = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
+                            customerCode = dataExt.getElementsByTagName("DataExtValue").item(0).getTextContent();
                         }
                     }
                     externalId = customerCode + "IDR";
