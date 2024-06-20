@@ -236,7 +236,9 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
 
                     queryBuilder.append("<SalesOrderLineAdd>");
                     queryBuilder.append("<ItemRef><FullName>").append(itemName).append("</FullName></ItemRef>");
-                    queryBuilder.append("<Quantity>").append(quantity).append("</Quantity>");
+                    if (itemName != "Store Discount" ||  itemName != "Store Discount") {
+                        queryBuilder.append("<Quantity>").append(quantity).append("</Quantity>");
+                    }
                     queryBuilder.append("<UnitOfMeasure>").append(unit).append("</UnitOfMeasure>");
                     queryBuilder.append("<Rate>").append(unitPrice).append("</Rate>");
                     queryBuilder.append("<DataExt><OwnerID>0</OwnerID><DataExtName>Unit Price</DataExtName><DataExtValue>").append(listPrice).append("</DataExtValue></DataExt>");
