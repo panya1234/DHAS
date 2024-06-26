@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <QBWCXML>
- <AppName>GetINCustomer</AppName>
+ <AppName>PDGetINCustomer</AppName>
  <AppID></AppID>
  <AppURL>https://apiqbook.dhas.com/GetINCustomer</AppURL>
- <AppDescription>A short description for GetINCustomer</AppDescription>
+ <AppDescription>A short description for GetINCustomer Production</AppDescription>
  <AppSupport>https://apiqbook.dhas.com/GetINCustomer</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>

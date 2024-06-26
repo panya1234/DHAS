@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <QBWCXML>
- <AppName>GetINItemInventory</AppName>
+ <AppName>PDGetINItemInventory</AppName>
  <AppID></AppID>
  <AppURL>https://apiqbook.dhas.com/GetINItemInventory</AppURL>
- <AppDescription>A short description for GetINItemInventory</AppDescription>
+ <AppDescription>A short description for GetINItemInventory Production</AppDescription>
  <AppSupport>https://apiqbook.dhas.com/GetINItemInventory</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>

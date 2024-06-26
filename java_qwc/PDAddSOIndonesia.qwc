@@ -1,8 +1,9 @@
+<?xml version="1.0"?>
 <QBWCXML>
- <AppName>AddSOIndonesia</AppName>
+ <AppName>PDAddSOIndonesia</AppName>
  <AppID></AppID>
  <AppURL>https://apiqbook.dhas.com/AddSOIndonesia</AppURL>
- <AppDescription>A short description for AddSOIndonesia</AppDescription>
+ <AppDescription>A short description for AddSOIndonesia Production</AppDescription>
  <AppSupport>https://apiqbook.dhas.com/AddSOIndonesia</AppSupport>
  <CertURL>https://dhas.com</CertURL>
  <UserName>Admin</UserName>
