@@ -6,7 +6,10 @@ import { mainINProducts } from './QBPostINProducts.js';
 import { mainPHPAccounts } from './QBPostPHPAccounts.js';
 import { mainPHPProducts } from './QBPostPHPProducts.js';
 import { mainErrorOrders } from './QBPostErrorOrders.js';
-import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_INACCOUNTS, JOB_SCHEDULE_PHPACCOUNTS, JOB_SCHEDULE_INPRODUCTS, JOB_SCHEDULE_PHPPRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
+import { mainCancelOrders } from './QBGetCancelOrders.js';
+import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_INACCOUNTS, JOB_SCHEDULE_PHPACCOUNTS, JOB_SCHEDULE_CANCEL_ORDERS } from './config.js';
+import { JOB_SCHEDULE_INPRODUCTS, JOB_SCHEDULE_PHPPRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
+
 
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
@@ -15,6 +18,16 @@ const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     } catch (error) {
         console.error('Error getting accounts:', error);
         taskOrders.stop();
+    }
+});
+
+const taskCancelOrders = cron.schedule(JOB_SCHEDULE_CANCEL_ORDERS, async () => {
+    try {
+        await mainCancelOrders()
+        // console.log('Order geted successfully.');
+    } catch (error) {
+        console.error('Error getting accounts:', error);
+        taskCancelOrders.stop();
     }
 });
 
@@ -71,6 +84,7 @@ const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
 const app = express();
 app.listen(8000, () => {
     mainOrders();
+    mainCancelOrders();
     // mainErrorOrders();
     mainINAccounts();
     mainPHPAccounts();

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<QBWCXML>
+ <AppName>PDGetPHPSequence</AppName>
+ <AppID></AppID>
+ <AppURL>https://apiqbook.dhas.com/GetPHPSequence</AppURL>
+ <AppDescription>A short description for GetPHPSequence Production</AppDescription>
+ <AppSupport>https://apiqbook.dhas.com/GetPHPSequence</AppSupport>
+ <CertURL>https://dhas.com</CertURL>
+ <UserName>Admin</UserName>
+ <OwnerID>{57F3B9B1-86F1-4fcc-B1EE-566DE1813D78}</OwnerID>
+ <FileID>{90A44FB5-33D9-4815-AC85-BC87A7E7D1ED}</FileID>
+ <QBType>QBFS</QBType>
+ <Scheduler>
+ <RunEveryNMinutes>2</RunEveryNMinutes>
+ </Scheduler>
+</QBWCXML>

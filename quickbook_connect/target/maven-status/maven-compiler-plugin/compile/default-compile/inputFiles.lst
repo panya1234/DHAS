@@ -1,9 +1,12 @@
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CloseConnectionResponse.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ObjectFactory.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\package-info.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetINSequence.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\SendRequestXMLResponse.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetPHPSequence.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ReceiveResponseXMLResponse.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetINCustomer.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\UpdateINSO.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ArrayOfString.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\CSVWriterSettings.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\Authenticate.java
@@ -25,4 +28,5 @@ C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\q
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\QBWebConnectorSvc.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\ReceiveResponseXML.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\QBWebConnectorSvcSoap.java
+C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\UpdatePHPSO.java
 C:\Users\panya\Downloads\DHAS\DHAS\quickbook_connect\src\main\java\com\cantero\quickbooks\ws\GetPHPCustomer.java

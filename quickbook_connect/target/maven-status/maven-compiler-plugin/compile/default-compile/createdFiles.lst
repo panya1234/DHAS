@@ -1,4 +1,5 @@
 com\cantero\quickbooks\ws\GetPHPCustomer.class
+com\cantero\quickbooks\ws\GetPHPSequence.class
 com\cantero\quickbooks\ws\ReceiveResponseXMLResponse.class
 com\cantero\quickbooks\ws\AddSOIndonesia.class
 com\cantero\quickbooks\ws\GetLastErrorResponse.class
@@ -17,6 +18,7 @@ com\cantero\quickbooks\ws\ConnectionError.class
 com\cantero\quickbooks\ws\ObjectFactory.class
 com\cantero\quickbooks\ws\SendRequestXML.class
 com\cantero\quickbooks\ws\CloseConnection.class
+com\cantero\quickbooks\ws\UpdateINSO.class
 com\cantero\quickbooks\ws\ConnectionErrorResponse.class
 com\cantero\quickbooks\ws\CSVWriterSettings.class
 com\cantero\quickbooks\ws\AuthenticateResponse.class
@@ -24,5 +26,7 @@ com\cantero\quickbooks\ws\ItemQueryRqSoapImpl.class
 com\cantero\quickbooks\ws\CloseConnectionResponse.class
 com\cantero\quickbooks\ws\GetPHPItemInventory.class
 com\cantero\quickbooks\ws\ArrayOfString.class
+com\cantero\quickbooks\ws\UpdatePHPSO.class
 com\cantero\quickbooks\ws\GetINCustomer.class
 com\cantero\quickbooks\ws\package-info.class
+com\cantero\quickbooks\ws\GetINSequence.class

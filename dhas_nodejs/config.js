@@ -1,5 +1,6 @@
 // time to work
 const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
+const JOB_SCHEDULE_CANCEL_ORDERS = '*/5 * * * *';
 const JOB_SCHEDULE_ERROR_ORDERS = '*/3 * * * *';
 const JOB_SCHEDULE_INACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
@@ -7,15 +8,12 @@ const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
-// const JOB_SCHEDULE_INACCOUNTS = '*/5 * * * *';
-// const JOB_SCHEDULE_INPRODUCTS = '*/5 * * * *';
-
-// const JOB_SCHEDULE_PHPACCOUNTS = '*/5 * * * *';
-// const JOB_SCHEDULE_PHPPRODUCTS = '*/5 * * * *';
-
 // path csv
 const READ_PATH = '/usr/src/app/CSV/READ/';
 const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
+// const WRITE_PATH = './CSV/WRITE/Orders/';//test
+const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/Orders/';
+// const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
 
 // path log
 const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
@@ -55,6 +53,7 @@ export { CLIENT_ID };
 export { CLIENT_SECRET };
 
 export { JOB_SCHEDULE_ORDERS };
+export { JOB_SCHEDULE_CANCEL_ORDERS };
 export { JOB_SCHEDULE_ERROR_ORDERS };
 
 export { JOB_SCHEDULE_INACCOUNTS };
@@ -65,6 +64,7 @@ export { JOB_SCHEDULE_PHPPRODUCTS };
 
 export { READ_PATH };
 export { WRITE_PATH };
+export { WRITE_CANCEL_PATH };
 
 export { ACCOUNT_PATH };
 export { PRODUCT_PATH };
