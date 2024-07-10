@@ -19,6 +19,9 @@ const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/Orders/';
 const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
 const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
 
+// const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';test
+// const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';test
+
 // path error orders
 const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
 
