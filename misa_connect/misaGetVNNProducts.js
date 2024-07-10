@@ -1,8 +1,6 @@
 import axios from "axios";
 import fs from 'fs';
-import csv from 'csv-parser';
-import qs from 'qs';
-import { READ_PATH, PRODUCT_PATH, URL, URL_TOKEN } from './misaConfig.js';
+import { READ_PATH, URL, URL_TOKEN } from './misaConfig.js';
 import { APP_ID, ACCESS_CODE, ORG_COMPANY_CODE } from './misaConfig.js';
 
 async function getTokenFromFile(filePath) {
@@ -20,34 +18,6 @@ async function getTokenFromFile(filePath) {
             }
         });
     });
-}
-
-async function getVNSProducts(token, skip, take) {
-    try {
-        const response = await axios.post(`${URL}get_list_inventory_balance`,
-            {
-                app_id: "5f4a649a-af16-4d98-afa0-3554314642da",
-                org_company_code: "congtydemoketnoiact",
-                stock_id: null,
-                branch_id: null,
-                skip: skip,
-                take: take,
-                last_sync_time: null
-            },
-            {
-                headers: {
-                    'X-MISA-AccessToken': token,
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (response.data.ErrorCode == 'ExpiredToken') {
-                const newToken = await refreshToken();
-                return await getVNSProducts(newToken);
-            }
-        return response.data;
-    } catch (error) {
-        console.error(error);
-    }
 }
 
 async function refreshToken() {
@@ -81,35 +51,66 @@ async function refreshToken() {
     }
 }
 
-export async function mainGetVNSProducts() {
+async function getVNNProducts(token, skip, take) {
+    try {
+        const response = await axios.post(`${URL}get_list_inventory_balance`,
+            {
+                app_id: "5f4a649a-af16-4d98-afa0-3554314642da",
+                org_company_code: "congtydemoketnoiact",
+                stock_id: "35f0b26a-9978-49f3-bd56-4e56933bebf7",
+                branch_id: null,
+                skip: skip,
+                take: take,
+                last_sync_time: null
+            },
+            {
+                headers: {
+                    'X-MISA-AccessToken': token,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (response.data.ErrorCode == 'ExpiredToken') {
+                const newToken = await refreshToken();
+                const skip = 0;
+                const take = 100;
+                return await getVNNProducts(newToken, skip, take);
+            }
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function mainGetVNNProducts() {
     try {
         const token = await getTokenFromFile('misatoken.json');
         let skip = 0;
-        let take = 2;
+        let take = 100;
         let products = [];
         let responseSize;
+
         do {
-            const resProducts = await getVNSProducts(token, skip, take);
+            const resProducts = await getVNNProducts(token, skip, take);
             const fetchedProducts = JSON.parse(resProducts.Data);
             products = products.concat(fetchedProducts);
             responseSize = fetchedProducts.length;
             skip += take;
             take += take;
-            console.log(skip);
-            console.log(take);
-        } while (responseSize === 2);
-
+        } while (responseSize === 100);
         console.log(responseSize);
 
-        products.forEach(product => {
-            const { inventory_item_code, 
-                    stock_code, 
-                    inventory_item_name ,
-                    quantity_balance,
-                    unit_price
-                } = product;
-            console.log(`Code: ${inventory_item_code}, stockCode: ${stock_code}, Code: ${inventory_item_name}`);
-            console.log(`Stock: ${quantity_balance}, Cost: ${unit_price}`);
+        const VNDN = "VNDN";
+        const csvHeaders = '"externalId","productCost","productStock"\n';
+        const csvRows = products.map(product => `"${product.inventory_item_code+VNDN}","${product.unit_price}","${product.quantity_balance}"`).join('\n');
+        const csvData = csvHeaders + csvRows;
+
+        const filePath = `${READ_PATH}VNNproducts.csv`;
+        fs.writeFile(filePath, csvData, 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing to CSV file:', err);
+            } else {
+                console.log('Products data written to VNNproducts.csv');
+            }
         });
 
     } catch (error) {
@@ -117,4 +118,4 @@ export async function mainGetVNSProducts() {
     }
 }
 
-mainGetVNSProducts();
+mainGetVNNProducts();

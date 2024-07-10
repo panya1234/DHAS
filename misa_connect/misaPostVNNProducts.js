@@ -2,8 +2,9 @@ import axios from "axios";
 import fs from 'fs';
 import csv from 'csv-parser';
 import qs from 'qs';
-import { READ_PATH, PRODUCT_PATH, URL, URL_TOKEN } from './misaConfig.js';
-// import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
+import { READ_PATH, PRODUCT_PATH } from './misaConfig.js';
+import { SF_URL, SF_URL_TOKEN } from './misaConfig.js';
+import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './misaConfig.js';
 
 async function readProductsFromCSV(filePath) {
     return new Promise((resolve, reject) => {
@@ -53,7 +54,7 @@ async function getTokenFromFile(filePath) {
 
 async function postProducts(token, chunk) {
     try {
-        const response = await axios.post(`${URL}/services/apexrest/object/products`,
+        const response = await axios.post(`${SF_URL}/services/apexrest/object/products`,
         chunk,
             {
                 headers: {
@@ -82,7 +83,7 @@ async function postProducts(token, chunk) {
 
 async function refreshToken() {
     try {
-        const response = await axios.post(`${URL_TOKEN}/services/oauth2/token`,
+        const response = await axios.post(`${SF_URL_TOKEN}/services/oauth2/token`,
             qs.stringify({
                 grant_type: GRANT_TYPE,
                 client_id: CLIENT_ID,
@@ -120,10 +121,10 @@ async function processChunks(filePath, token) {
     }
 }
 
-export async function mainINProducts() {
+export async function mainPostVNNProducts() {
     try {
-        const token = await getTokenFromFile('misatoken.json');
-        const filePath = `${READ_PATH}VNSproducts.csv`;
+        const token = await getTokenFromFile('sftoken.json');
+        const filePath = `${READ_PATH}VNNproducts.csv`;
         const results = await processChunks(filePath, token);
 
         const now = new Date();
@@ -133,7 +134,7 @@ export async function mainINProducts() {
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const formattedDate = `${day}-${month}-${year}-${hours}-${minutes}`;
-        const logFilePath = `${PRODUCT_PATH}VNSProductlogs_${formattedDate}.csv`;
+        const logFilePath = `${PRODUCT_PATH}VNNProductlogs_${formattedDate}.csv`;
 
         const csvData = results.map((result, index) => {
             const data = result.map(item => [
@@ -157,4 +158,4 @@ export async function mainINProducts() {
 
 // export { mainProducts };
 
-// mainProducts();
+mainPostVNNProducts();
