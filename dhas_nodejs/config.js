@@ -12,7 +12,7 @@ const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 const READ_PATH = '/usr/src/app/CSV/READ/';
 const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
 // const WRITE_PATH = './CSV/WRITE/Orders/';//test
-const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/Orders/';
+const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
 // const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
 
 // path log
