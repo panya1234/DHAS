@@ -38,5 +38,11 @@ public class App {
 
         Endpoint.publish("http://0.0.0.0:8080/GetPHPCustomer", new GetPHPCustomer());
         System.out.println("GetPHPCustomer ");
+
+        Endpoint.publish("http://0.0.0.0:8080/GetINSequence", new GetINSequence());
+        System.out.println("GetINSequence ");
+
+        Endpoint.publish("http://0.0.0.0:8080/UpdateINSO", new UpdateINSO());
+        System.out.println("UpdateINSO ");
     }
 } // or the version compatible with your JDK
