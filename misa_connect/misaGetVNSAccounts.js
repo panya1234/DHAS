@@ -51,7 +51,7 @@ async function refreshToken() {
     }
 }
 
-async function getVNNAccounts(token, skip, take) {
+async function getVNSAccounts(token, skip, take) {
     try {
         const response = await axios.post(`${URL}get_dictionary`,
             {
@@ -73,7 +73,7 @@ async function getVNNAccounts(token, skip, take) {
             //     const newToken = await refreshToken();
             //     const skip = 0;
             //     const take = 100;
-            //     return await getVNNAccounts(newToken, skip, take);
+            //     return await getVNSAccounts(newToken, skip, take);
             // }
         return response.data;
     } catch (error) {
@@ -111,7 +111,7 @@ async function getPaymentTerms(token, skip, take) {
     }
 }
 
-export async function mainGetVNNAccounts() {
+export async function mainGetVNSAccounts() {
     try {
         const token = await getTokenFromFile('misatoken.json');
         let skip = 0;
@@ -129,7 +129,7 @@ export async function mainGetVNNAccounts() {
         // });
         
         do {
-            const resAccounts = await getVNNAccounts(token, skip, take);
+            const resAccounts = await getVNSAccounts(token, skip, take);
             const fetchedAccounts = JSON.parse(resAccounts.Data);
             accounts = accounts.concat(fetchedAccounts);
             responseSize = fetchedAccounts.length;
@@ -149,7 +149,7 @@ export async function mainGetVNNAccounts() {
             `"${account.account_object_code}","${account.maximize_debt_amount}","${payment_term_names[index]}"`).join('\n');
         const csvData = csvHeaders + csvRows;
 
-        const filePath = `${READ_PATH}VNNaccounts.csv`;
+        const filePath = `${READ_PATH}VNSaccounts.csv`;
         fs.writeFile(filePath, csvData, 'utf8', (err) => {
             if (err) throw err;
             console.log('CSV file has been saved.');
@@ -160,4 +160,4 @@ export async function mainGetVNNAccounts() {
     }
 }
 
-mainGetVNNAccounts();
+mainGetVNSAccounts();
