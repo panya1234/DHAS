@@ -42,7 +42,13 @@ public class App {
         Endpoint.publish("http://0.0.0.0:8080/GetINSequence", new GetINSequence());
         System.out.println("GetINSequence ");
 
+        Endpoint.publish("http://0.0.0.0:8080/GetPHPSequence", new GetPHPSequence());
+        System.out.println("GetPHPSequence ");
+
         Endpoint.publish("http://0.0.0.0:8080/UpdateINSO", new UpdateINSO());
         System.out.println("UpdateINSO ");
+
+        Endpoint.publish("http://0.0.0.0:8080/UpdatePHPSO", new UpdatePHPSO());
+        System.out.println("UpdatePHPSO ");
     }
 } // or the version compatible with your JDK
