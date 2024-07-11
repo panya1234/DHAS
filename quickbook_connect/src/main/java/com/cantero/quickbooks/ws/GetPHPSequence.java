@@ -128,7 +128,7 @@ public class GetPHPSequence implements QBWebConnectorSvcSoap {
         
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"13.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\">");
-        final String FILE_CANCAL_PATH = "C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/CancelOrders/Indonesia/cancelOrdersIN.csv";
+        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Indonesia/cancelOrdersIN.csv";
         try (CSVReader readerCancelSO = new CSVReader(new FileReader(FILE_CANCAL_PATH))){
             readerCancelSO.skip(1);
 
