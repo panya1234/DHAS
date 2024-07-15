@@ -1,11 +1,16 @@
 package com.cantero.quickbooks.ws;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 
 import javax.jws.WebService;
 
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.StringReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -15,6 +20,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.List;
 
@@ -24,6 +30,7 @@ import com.opencsv.CSVWriter;
 /*
  * http://developer.intuit.com/qbsdk-current/doc/pdf/qbwc_proguide.pdf
  */
+@SuppressWarnings("unused")
 @WebService(endpointInterface = "com.cantero.quickbooks.ws.QBWebConnectorSvcSoap")
 public class UpdateINSO implements QBWebConnectorSvcSoap {
 
@@ -65,8 +72,9 @@ public class UpdateINSO implements QBWebConnectorSvcSoap {
         // TODO Auto-generated method stub
         System.out.println(response);
 
-        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Indonesia/cancelOrdersIN.csv";
-        try (CSVReader readerCancelSO = new CSVReader(new FileReader(FILE_CANCAL_PATH))){
+        final String ERROR_FILE_PATH = "CSV/READ/errorOrders.csv";
+        final String CANCEL_FILE_PATH = "CSV/WRITE/CancelOrders/Indonesia/cancelOrdersIN.csv";
+        try (CSVReader readerCancelSO = new CSVReader(new FileReader(CANCEL_FILE_PATH))){
             List<String[]> allRows = readerCancelSO.readAll();
             readerCancelSO.skip(1);
             
@@ -88,19 +96,70 @@ public class UpdateINSO implements QBWebConnectorSvcSoap {
                             break; 
                         }
                     }
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_CANCAL_PATH));
+                    CSVWriter writerOrders = new CSVWriter(new FileWriter(CANCEL_FILE_PATH));
                     writerOrders.writeAll(allRows);
                     writerOrders.close();   
                 } else {
-                    if (allRows.size() > 2) {
-                        String[] rowAfterHeader = allRows.remove(1);
-                        allRows.add(rowAfterHeader);
-                    }
-                    CSVWriter writerOrders = new CSVWriter(new FileWriter(FILE_CANCAL_PATH));
-                    writerOrders.writeAll(allRows);
-                    writerOrders.close();
-                }
+                    Element salesOrderAddElement = (Element) salesOrderAddRs.item(0);
+                    String statusMessage = salesOrderAddElement.getAttribute("statusMessage");
+                    if (statusMessage.contains("There was an error adding, modifying or deleting 495-1718624050 because it is already in use.  QuickBooks error message: The transaction could not be locked.  It is in use by another user.")) {
+                        if (allRows.size() > 2) {
+                            String[] rowAfterHeader = allRows.remove(1);
+                            allRows.add(rowAfterHeader);
+                        }
+                        CSVWriter writerOrders = new CSVWriter(new FileWriter(CANCEL_FILE_PATH));
+                        writerOrders.writeAll(allRows);
+                        writerOrders.close();
+                    } else {
+                        ArrayList<String[]> deletedRows = new ArrayList<>();
 
+                        String orderId = "";
+                        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");  
+                        LocalDate now = LocalDate.now();  
+                        Iterator<String[]> iterator = allRows.iterator();
+                        if (iterator.hasNext()) {
+                            iterator.next();
+                        }
+                        while (iterator.hasNext()) {
+                            String[] row = iterator.next();
+                            orderId = row[0];
+                            iterator.remove();
+                            row = Arrays.copyOf(row, row.length + 2);
+                            row[row.length - 2] = statusMessage;
+                            row[row.length - 1] = dtf.format(now);
+                            deletedRows.add(row);
+                            break;
+                        }
+
+                        System.out.println(deletedRows);
+
+                        List<String[]> updatedDeletedRows = new ArrayList<>();
+                        for (String[] row : deletedRows) {
+                            List<String> newRow = new ArrayList<>();
+                            for (int k = 0; k < row.length; k++) {
+                                if (k < 3 || k > 5) {
+                                    newRow.add(row[k]);
+                                }
+                            }
+                            updatedDeletedRows.add(newRow.toArray(new String[0]));
+                        }
+
+                        CSVWriter writerOrders = new CSVWriter(new FileWriter(CANCEL_FILE_PATH));
+                        writerOrders.writeAll(allRows);
+                        writerOrders.close();
+
+                        CSVWriter writerDeletedOrders = new CSVWriter(new FileWriter(ERROR_FILE_PATH, true)); 
+                        if (new File(ERROR_FILE_PATH).length() > 0) { 
+                            writerDeletedOrders.writeAll(updatedDeletedRows);
+                        } else {
+                            writerDeletedOrders.writeNext(new String[]{"soId", "accountName", "qbSalesOrder", "errorReason", "errorDate"});
+                            writerDeletedOrders.writeAll(updatedDeletedRows);
+                        }
+                        writerDeletedOrders.close();
+                        }
+
+                        System.out.println("Updated Logs: " + ERROR_FILE_PATH);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
