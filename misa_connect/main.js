@@ -1,11 +1,64 @@
+import cron from 'node-cron';
 import express from 'express';
-const app = express();
-const port = 3000;
+//VNN
+import { mainGetVNNAccounts } from './misaGetVNNAccounts.js';
+import { mainGetVNNProducts } from './misaGetVNNProducts.js';
+import { mainPostVNNAccounts } from './misaPostVNNAccounts.js';
+import { mainPostVNNProducts } from './misaPostVNNProducts.js';
+//VNS
+import { mainGetVNSAccounts } from './misaGetVNSAccounts.js';
+import { mainGetVNSProducts } from './misaGetVNSProducts.js';
+import { mainPostVNSAccounts } from './misaPostVNSAccounts.js';
+import { mainPostVNSProducts } from './misaPostVNSProducts.js';
 
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSACCOUNTS, JOB_SCHEDULE_VNSPRODUCTS } from './misaConfig.js';
+
+const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
+  try {
+      await mainGetVNNAccounts()
+      await mainPostVNNAccounts()
+      console.log('hgfdg');
+  } catch (error) {
+      console.error('Error posting accounts:', error);
+      taskVNNAccounts.stop();
+  }
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}/`);
+const taskVNNProducts = cron.schedule(JOB_SCHEDULE_VNNPRODUCTS, async () => {
+  try {
+      await mainGetVNNProducts()
+      await mainPostVNNProducts()
+  } catch (error) {
+      console.error('Error posting accounts:', error);
+      taskVNNProducts.stop();
+  }
+});
+
+const taskVNSAccounts = cron.schedule(JOB_SCHEDULE_VNSACCOUNTS, async () => {
+  try {
+      await mainGetVNSAccounts()
+      await mainPostVNSAccounts()
+  } catch (error) {
+      console.error('Error posting accounts:', error);
+      taskVNSAccounts.stop();
+  }
+});
+
+const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
+  try {
+      await mainGetVNSProducts()
+      await mainPostVNSProducts()
+  } catch (error) {
+      console.error('Error posting accounts:', error);
+      taskVNSProducts.stop();
+  }
+});
+
+const app = express();
+app.listen(3000, () => {
+    taskVNNAccounts.start();
+    taskVNNProducts.start();
+    taskVNSAccounts.start();
+    taskVNSProducts.start();
+    console.log('Server is running on port 3000');
 });

@@ -121,10 +121,10 @@ async function processChunks(filePath, token) {
     }
 }
 
-export async function mainPostVNNAccounts() {
+export async function mainPostVNSAccounts() {
     try {
         const token = await getTokenFromFile('sftoken.json');
-        const filePath = `${READ_PATH}VNNAccounts.csv`;
+        const filePath = `${READ_PATH}VNSAccounts.csv`;
         const results = await processChunks(filePath, token);
 
         const now = new Date();
@@ -134,7 +134,7 @@ export async function mainPostVNNAccounts() {
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const formattedDate = `${day}-${month}-${year}-${hours}-${minutes}`;
-        const logFilePath = `${ACCOUNT_PATH}VNNAccountlogs_${formattedDate}.csv`;
+        const logFilePath = `${ACCOUNT_PATH}VNSAccountlogs_${formattedDate}.csv`;
 
         const csvData = results.map((result, index) => {
             const data = result.map(item => [
@@ -159,4 +159,4 @@ export async function mainPostVNNAccounts() {
 
 // export { mainaccounts };
 
-mainPostVNNAccounts();
+// mainPostVNSAccounts();

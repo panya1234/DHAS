@@ -2,11 +2,11 @@ import axios from "axios";
 import fs from 'fs';
 import csv from 'csv-parser';
 import qs from 'qs';
-import { READ_PATH, PRODUCT_PATH } from './misaConfig.js';
+import { READ_PATH, ACCOUNT_PATH } from './misaConfig.js';
 import { SF_URL, SF_URL_TOKEN } from './misaConfig.js';
 import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './misaConfig.js';
 
-async function readProductsFromCSV(filePath) {
+async function readAccountsFromCSV(filePath) {
     return new Promise((resolve, reject) => {
         const body = [];
         let chunk = [];
@@ -52,9 +52,9 @@ async function getTokenFromFile(filePath) {
     });
 }
 
-async function postProducts(token, chunk) {
+async function postAccounts(token, chunk) {
     try {
-        const response = await axios.post(`${SF_URL}/services/apexrest/object/products`,
+        const response = await axios.post(`${SF_URL}/services/apexrest/object/accounts`,
         chunk,
             {
                 headers: {
@@ -67,7 +67,7 @@ async function postProducts(token, chunk) {
         console.error('Error response data:', error.response.data);
         if (error.response.data.some(obj => obj.errorCode === 'INVALID_SESSION_ID')) {
             const newToken = await refreshToken();
-            return await postProducts(newToken, chunk);
+            return await postAccounts(newToken, chunk);
         } else {
             if (error.response && error.response.data) {
                 return error.response.data;
@@ -105,12 +105,12 @@ async function refreshToken() {
 
 async function processChunks(filePath, token) {
     try {
-        const chunks = await readProductsFromCSV(filePath);
+        const chunks = await readAccountsFromCSV(filePath);
         const results = [];
 
         for (let i = 0; i < chunks.length; i++) {
             const chunk = chunks[i];
-            const result = await postProducts(token, chunk);
+            const result = await postAccounts(token, chunk);
             results.push(result);
         }
 
@@ -121,10 +121,10 @@ async function processChunks(filePath, token) {
     }
 }
 
-export async function mainPostVNNProducts() {
+export async function mainPostVNNAccounts() {
     try {
         const token = await getTokenFromFile('sftoken.json');
-        const filePath = `${READ_PATH}VNNproducts.csv`;
+        const filePath = `${READ_PATH}VNNAccounts.csv`;
         const results = await processChunks(filePath, token);
 
         const now = new Date();
@@ -134,16 +134,17 @@ export async function mainPostVNNProducts() {
         const hours = now.getHours().toString().padStart(2, '0');
         const minutes = now.getMinutes().toString().padStart(2, '0');
         const formattedDate = `${day}-${month}-${year}-${hours}-${minutes}`;
-        const logFilePath = `${PRODUCT_PATH}VNNProductlogs_${formattedDate}.csv`;
+        const logFilePath = `${ACCOUNT_PATH}VNNAccountlogs_${formattedDate}.csv`;
 
         const csvData = results.map((result, index) => {
             const data = result.map(item => [
                 item.result,
                 item.reason,
                 item.id,
-                item.product_stock_c,
-                item.product_cost_c,
-                item.externalid_c,
+                item.customer_code,
+                item.credit_term,
+                item.credit_limit,
+                item.qb_list_id,
                 formattedDate 
             ].join(',')).join(`\n`);
             return data;
@@ -156,6 +157,6 @@ export async function mainPostVNNProducts() {
     }
 }
 
-// export { mainProducts };
+// export { mainaccounts };
 
-// mainPostVNNProducts();
+// mainPostVNNAccounts();

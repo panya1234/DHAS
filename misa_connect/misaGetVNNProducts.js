@@ -99,9 +99,9 @@ export async function mainGetVNNProducts() {
         } while (responseSize === 100);
         console.log(responseSize);
 
-        const VNDN = "VNDN";
+        const VNS1 = "VNS1";
         const csvHeaders = '"externalId","productCost","productStock"\n';
-        const csvRows = products.map(product => `"${product.inventory_item_code+VNDN}","${product.unit_price}","${product.quantity_balance}"`).join('\n');
+        const csvRows = products.map(product => `"${product.inventory_item_code+VNS1}","${product.unit_price}","${product.quantity_balance}"`).join('\n');
         const csvData = csvHeaders + csvRows;
 
         const filePath = `${READ_PATH}VNNproducts.csv`;
@@ -118,4 +118,4 @@ export async function mainGetVNNProducts() {
     }
 }
 
-mainGetVNNProducts();
+// mainGetVNNProducts();

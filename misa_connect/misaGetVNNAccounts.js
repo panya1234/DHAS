@@ -144,8 +144,10 @@ export async function mainGetVNNAccounts() {
             return term ? term.payment_term_name : null;
         });
 
+        const filteredProducts = accounts.filter(account => account.account_object_code.startsWith("1"));
+
         const csvHeaders = '"ExternalId","CreditLimit","CreditTerm"\n';
-        const csvRows = accounts.map((account, index) => 
+        const csvRows = filteredProducts.map((account, index) => 
             `"${account.account_object_code}","${account.maximize_debt_amount}","${payment_term_names[index]}"`).join('\n');
         const csvData = csvHeaders + csvRows;
 
@@ -160,4 +162,4 @@ export async function mainGetVNNAccounts() {
     }
 }
 
-mainGetVNNAccounts();
+// mainGetVNNAccounts();

@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Docker Node.js Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "platform": "node",
+            "node": {
+                "package": "${workspaceFolder}/misa_connect/node_modules/content-type/package.json",
+                "localRoot": "${workspaceFolder}/misa_connect/node_modules/content-type"
+            }
+        }
+    ]
+}
