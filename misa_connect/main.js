@@ -6,12 +6,10 @@ import { mainGetVNNProducts } from './misaGetVNNProducts.js';
 import { mainPostVNNAccounts } from './misaPostVNNAccounts.js';
 import { mainPostVNNProducts } from './misaPostVNNProducts.js';
 //VNS
-import { mainGetVNSAccounts } from './misaGetVNSAccounts.js';
 import { mainGetVNSProducts } from './misaGetVNSProducts.js';
-import { mainPostVNSAccounts } from './misaPostVNSAccounts.js';
 import { mainPostVNSProducts } from './misaPostVNSProducts.js';
 
-import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSACCOUNTS, JOB_SCHEDULE_VNSPRODUCTS } from './misaConfig.js';
+import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSPRODUCTS } from './misaConfig.js';
 
 const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
   try {
@@ -34,16 +32,6 @@ const taskVNNProducts = cron.schedule(JOB_SCHEDULE_VNNPRODUCTS, async () => {
   }
 });
 
-const taskVNSAccounts = cron.schedule(JOB_SCHEDULE_VNSACCOUNTS, async () => {
-  try {
-      await mainGetVNSAccounts()
-      await mainPostVNSAccounts()
-  } catch (error) {
-      console.error('Error posting accounts:', error);
-      taskVNSAccounts.stop();
-  }
-});
-
 const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
   try {
       await mainGetVNSProducts()
@@ -56,9 +44,8 @@ const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
 
 const app = express();
 app.listen(3000, () => {
+    console.log('Server is running on port 3000');
     taskVNNAccounts.start();
     taskVNNProducts.start();
-    taskVNSAccounts.start();
     taskVNSProducts.start();
-    console.log('Server is running on port 3000');
 });

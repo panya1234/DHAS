@@ -69,12 +69,6 @@ async function getVNNAccounts(token, skip, take) {
                     'Content-Type': 'application/json'
                 }
             });
-            // if (response.data.ErrorCode == 'ExpiredToken') {
-            //     const newToken = await refreshToken();
-            //     const skip = 0;
-            //     const take = 100;
-            //     return await getVNNAccounts(newToken, skip, take);
-            // }
         return response.data;
     } catch (error) {
         console.error(error);
@@ -135,19 +129,16 @@ export async function mainGetVNNAccounts() {
             responseSize = fetchedAccounts.length;
             skip += take;
             take += take;
-
         } while (responseSize === 100);
         console.log(responseSize);
 
         const payment_term_names = accounts.map(account => {
-            const term = terms.find(term => term.payment_term_id === account.payment_term_id);
+            const term = terms.find(term => account.payment_term_id === term.payment_term_id );
             return term ? term.payment_term_name : null;
         });
 
-        const filteredProducts = accounts.filter(account => account.account_object_code.startsWith("1"));
-
         const csvHeaders = '"ExternalId","CreditLimit","CreditTerm"\n';
-        const csvRows = filteredProducts.map((account, index) => 
+        const csvRows = accounts.map((account, index) => 
             `"${account.account_object_code}","${account.maximize_debt_amount}","${payment_term_names[index]}"`).join('\n');
         const csvData = csvHeaders + csvRows;
 
@@ -162,4 +153,4 @@ export async function mainGetVNNAccounts() {
     }
 }
 
-// mainGetVNNAccounts();
+mainGetVNNAccounts();
