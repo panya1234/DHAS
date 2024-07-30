@@ -114,7 +114,11 @@ async function exportToCSV(data) {
                 header: [
                     { id: 'Id', title: 'Order Id' },
                     { id: 'QBListID', title: 'QBListID' },
-                    { id: 'QBSalesOrders', title: 'QBSales Order' }
+                    { id: 'QBSalesOrders', title: 'QBSales Order' },
+                    { id: 'AccountCode', title: 'AccountCode' },
+                    { id: 'AccountName', title: 'AccountName' },
+                    { id: 'taxCode', title: 'taxCode' },
+                    { id: 'Amount', title: 'Amount' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -123,7 +127,11 @@ async function exportToCSV(data) {
             const records = ordersByRole[roleName].map(order => ({
                 Id: order.Id,
                 QBSalesOrders: order.QB_Sales_Orders__c,
-                QBListID: order.Account.QB_List_ID__c
+                QBListID: order.Account.QB_List_ID__c,
+                AccountCode: order.Account.Customer_Code__c,
+                AccountName: order.Account.Name,
+                taxCode: order.Account.TAX_code__c,
+                Amount: order.TotalAmount
             }));
             
             await csvWriter.writeRecords(records);
@@ -169,7 +177,8 @@ async function exportToCSV(data) {
                     { id: 'Quantity', title: 'Quantity' },
                     { id: 'SalesUM', title: 'Sales U/M' },
                     { id: 'UnitPrice', title: 'UnitPrice' },
-                    { id: 'ListPrice', title: 'ListPrice' }
+                    { id: 'ListPrice', title: 'ListPrice' },
+                    { id: 'ProductName', title: 'ProductName' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -182,7 +191,8 @@ async function exportToCSV(data) {
                 Quantity: orderLine.Quantity,
                 SalesUM: orderLine.Product2.Sales_U_M__c,
                 UnitPrice: orderLine.UnitPrice,
-                ListPrice: orderLine.ListPrice
+                ListPrice: orderLine.ListPrice,
+                ProductName: orderLine.Product2.Name
             }));
 
             await csvWriter.writeRecords(records);

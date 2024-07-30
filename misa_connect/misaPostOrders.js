@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import csv from 'csv-parser';
-import { READ_PATH, URL, URL_TOKEN } from './misaConfig.js';
+import { WRITE_PATH, URL, URL_TOKEN } from './misaConfig.js';
 import { APP_ID, ACCESS_CODE, ORG_COMPANY_CODE } from './misaConfig.js';
 
 function getFormattedDate() {
@@ -94,13 +94,8 @@ async function refreshToken() {
     }
 }
 
-async function createVoucherJSON() {
-    const orderData = await readCSVFile('C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Orders/North_Vietnam/ordersNV.csv');
-    const productData = await readCSVFile('C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Orders/North_Vietnam/orderItemsNV.csv');
-
-    // Assume only one order in orderData
-    const order = orderData[0];
-    const products = productData.map((product, index) => {
+function createVoucherJSON(order, products) {
+    const formattedProducts = products.map((product, index) => {
         const quantity = parseFloat(product.Quantity);
         const externalId = product["External Id"].toString();
         const whereHouse = externalId.slice(-4);
@@ -144,7 +139,7 @@ async function createVoucherJSON() {
         app_id: APP_ID,
         voucher: [
             {
-                detail: products,
+                detail: formattedProducts,
                 voucher_type: 20,
                 is_get_new_id: true,
                 org_refid: generateUUID(),
@@ -201,9 +196,9 @@ async function createVoucherJSON() {
     return voucherJSON;
 }
 
-async function postOrders(token) {
+async function postOrders(order, products, token) {
     try {
-        const voucherJSON = await createVoucherJSON();
+        const voucherJSON = createVoucherJSON(order, products);
         const response = await axios.post(`${URL}save`,
             voucherJSON,
             {
@@ -212,30 +207,52 @@ async function postOrders(token) {
                     'Content-Type': 'application/json'
                 }
             });
-            if (response.data.ErrorCode == 'ExpiredToken') {
-                const newToken = await refreshToken();
-                return await postOrders(newToken);
-            }
+        if (response.data.ErrorCode == 'ExpiredToken') {
+            const newToken = await refreshToken();
+            return await postOrders(order, products, newToken);
+        }
         return response.data;
     } catch (error) {
         console.error(error);
     }
 }
 
+async function clearCSVFile(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            const rows = data.split('\n');
+            const headers = rows[0];
+            fs.writeFile(filePath, headers + '\n', 'utf8', (err) => {
+                if (err) reject(err);
+                resolve();
+            });
+        });
+    });
+}
 
 export async function mainPostOrders() {
     try {
         const token = await getTokenFromFile('misatoken.json');
+        const orderData = await readCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
+        const productData = await readCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
 
-        // const d = await createVoucherJSON();
-        // console.log(JSON.stringify(d, null, 2));
+        for (const order of orderData) {
+            const products = productData.filter(product => product["Order Id"] === order["Order Id"]);
+            const resAccounts = await postOrders(order, products, token);
+            console.log(resAccounts);
+        }
 
-        const resAccounts = await postOrders(token);
-        console.log(resAccounts);
+        await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
+        await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
+        console.log('CSV files cleared.');
 
     } catch (error) {
         console.error('Error in main:', error);
     }
 }
 
-mainPostOrders();
+// mainPostOrders();

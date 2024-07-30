@@ -157,6 +157,4 @@ export async function mainPostVNNAccounts() {
     }
 }
 
-// export { mainaccounts };
-
 // mainPostVNNAccounts();

@@ -145,7 +145,7 @@ export async function mainGetVNNAccounts() {
         const filePath = `${READ_PATH}VNNaccounts.csv`;
         fs.writeFile(filePath, csvData, 'utf8', (err) => {
             if (err) throw err;
-            console.log('CSV file has been saved.');
+            console.log('VNNaccounts.csv file has been saved.');
         });
 
     } catch (error) {
@@ -153,4 +153,4 @@ export async function mainGetVNNAccounts() {
     }
 }
 
-mainGetVNNAccounts();
+// mainGetVNNAccounts();

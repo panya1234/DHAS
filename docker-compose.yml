@@ -1,8 +1,8 @@
 version: '3.3'
 services:  
-  nodejs_misa:
+  nodejs:
     build: ./dhas_nodejs/
-    container_name: nodejs_misa
+    container_name: nodejs
     ports:
       - 8000:8000
     volumes:
@@ -15,3 +15,11 @@ services:
       - 8080:8080
     volumes:
       - ./dhas_nodejs/CSV:/app/quickbook_connect/target/CSV
+
+  misa_connect:
+    build: ./misa_connect/
+    container_name: misa_connect
+    ports:
+      - 8800:8800
+    volumes:
+      - ./dhas_nodejs/CSV:/usr/src/app/CSV

@@ -156,6 +156,4 @@ export async function mainPostVNSProducts() {
     }
 }
 
-// export { mainProducts };
-
 // mainPostVNSProducts();

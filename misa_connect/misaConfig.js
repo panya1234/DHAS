@@ -1,18 +1,18 @@
-// const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
+const JOB_SCHEDULE_ORDERS = '*/5 * * * *';
 // const JOB_SCHEDULE_CANCEL_ORDERS = '*/5 * * * *';
 // const JOB_SCHEDULE_ERROR_ORDERS = '*/5 * * * * *';
-const JOB_SCHEDULE_VNNACCOUNTS = '*/1 * * * *';
-const JOB_SCHEDULE_VNNPRODUCTS = '*/1 * * * *';
+const JOB_SCHEDULE_VNNACCOUNTS = '*/5 * * * *';
+const JOB_SCHEDULE_VNNPRODUCTS = '*/5 * * * *';
 
-const JOB_SCHEDULE_VNSACCOUNTS = '*/1 * * * *';
-const JOB_SCHEDULE_VNSPRODUCTS = '*/1 * * * *';
+const JOB_SCHEDULE_VNSACCOUNTS = '*/5 * * * *';
+const JOB_SCHEDULE_VNSPRODUCTS = '*/5 * * * *';
 
-// const READ_PATH = '/usr/src/app/CSV/READ/';
-// const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
-// const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
+const READ_PATH = '/usr/src/app/CSV/READ/';
+const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
+const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
 
-// const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
-// const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
+const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
+const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
 
 // const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
 // const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
@@ -21,16 +21,16 @@ const JOB_SCHEDULE_VNSPRODUCTS = '*/1 * * * *';
 // const ACCESS_CODE = 'NtIFcB2K0dVPwhPC9bCOw6pWGJ3cdNZxl0jbV1MA+0Ie3rDXt56p0lAPb7XiIKbsNRlAoS7jZrUhNfH//CxOezOAP0ZepaJHCtSClFJr72mdhmTVG3YKCvOxMtLWBg6XIEixPZmGAqb8J9mz3mAzTKfTHupvNieLDGm7InXkLWkkNS1ljLn4Je8AxF6pXv4jpvx7ofEsSY4TFyAcSIhF3Vq/FKhx+2i17hXFjQ9RQqZhEN9QDLl1T8W3Vcj1Q/mYTejfFPD8alzgep1G8o83FA==';
 // const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 
-// const URL = 'https://flow-dream-5899.my.salesforce.com';
-// const URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
+// const SF_URL = 'https://flow-dream-5899.my.salesforce.com';
+// const SF_URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
 
 // --------------------------test--------------------------
-const READ_PATH = './CSV/READ/';
-const WRITE_PATH = './CSV/WRITE/Orders/';
-const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';
+// const READ_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/READ/';
+// const WRITE_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Orders/';
+// const WRITE_CANCEL_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/CancelOrders/';
 
-const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';
-const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';
+// const ACCOUNT_PATH  = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Logs/AccountLogs/';
+// const PRODUCT_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Logs/ProductLogs/';
 
 const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
 const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
@@ -72,7 +72,7 @@ export { APP_ID };
 export { ACCESS_CODE };
 export { ORG_COMPANY_CODE };
 
-// export { JOB_SCHEDULE_ORDERS };
+export { JOB_SCHEDULE_ORDERS };
 // export { JOB_SCHEDULE_CANCEL_ORDERS };
 // export { JOB_SCHEDULE_ERROR_ORDERS };
 
