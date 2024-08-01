@@ -204,7 +204,6 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
         final String SO_FILE_PATH = "CSV/WRITE/Orders/Philippines/ordersPH.csv";
         final String SO_LINE_ITEMS_FILE_PATH = "CSV/WRITE/Orders/Philippines/orderItemsPH.csv";
 
-
         try (CSVReader readerSO = new CSVReader(new FileReader(SO_FILE_PATH));
              CSVReader readerSOItems = new CSVReader(new FileReader(SO_LINE_ITEMS_FILE_PATH))) {
             
@@ -213,17 +212,42 @@ public class AddSOPhilippines implements QBWebConnectorSvcSoap {
             readerSO.skip(1);
             readerSOItems.skip(1);
 
-
             String[] line = readerSO.readNext();
             String sOItemId = line[0];
             String listID = line[1];
             String SOnumber = line[2];
+            String Addr1 = line[7];
+            String City = line[8];
+            String State = line[9];
+            String PostalCode = line[10];
+            String Country = line[11];
 
             queryBuilder.append("<SalesOrderAddRq requestID=\"2\">");
             queryBuilder.append("<SalesOrderAdd>");
             queryBuilder.append("<CustomerRef><ListID>").append(listID).append("</ListID></CustomerRef>");
             queryBuilder.append("<TemplateRef><FullName>SALE ORDER</FullName></TemplateRef>");
             queryBuilder.append("<RefNumber>").append(SOnumber).append("</RefNumber>");
+
+            String Addr2 = "";
+            String Addr3 = "";
+            if (Addr1.length() > 40) {
+                Addr2 = Addr1.substring(40);
+                Addr1 = Addr1.substring(0, 40);
+                if (Addr2.length() > 40) {
+                    Addr3 = Addr2.substring(40);
+                    Addr2 = Addr2.substring(0, 40);
+                }
+            }
+
+            queryBuilder.append("<ShipAddress>");
+            queryBuilder.append("<Addr1>").append(Addr1).append("</Addr1>");
+            if (!Addr2.isEmpty()) queryBuilder.append("<Addr2>").append(Addr2).append("</Addr2>");
+            if (!Addr3.isEmpty()) queryBuilder.append("<Addr3>").append(Addr3).append("</Addr3>");
+            queryBuilder.append("<City>").append(City).append("</City>");
+            queryBuilder.append("<State>").append(State).append("</State>");
+            queryBuilder.append("<PostalCode>").append(PostalCode).append("</PostalCode>");
+            queryBuilder.append("<Country>").append(Country).append("</Country>");
+            queryBuilder.append("</ShipAddress>");
             
             for (int k = 0; k < allItemRows.size(); k++) {
                 String[] row = allItemRows.get(k);

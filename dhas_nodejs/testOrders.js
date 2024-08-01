@@ -123,11 +123,20 @@ async function exportToCSV(data) {
                     { id: 'AccountCode', title: 'AccountCode' },
                     { id: 'AccountName', title: 'AccountName' },
                     { id: 'taxCode', title: 'taxCode' },
-                    { id: 'Amount', title: 'Amount' }
+                    { id: 'Amount', title: 'Amount' },
+                    { id: 'Address', title: 'Address' },
+                    { id: 'City', title: 'City' },
+                    { id: 'State', title: 'State' },
+                    { id: 'PostalCode', title: 'PostalCode' },
+                    { id: 'Country', title: 'Country' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
             });
+
+            const sanitizeAddress = (str) => {
+                return str.replace(/\r?\n|\r/g, ' ');
+            }
 
             const records = ordersByRole[roleName].map(order => ({
                 Id: order.Id,
@@ -135,8 +144,13 @@ async function exportToCSV(data) {
                 QBListID: order.Account.QB_List_ID__c,
                 AccountCode: order.Account.Customer_Code__c,
                 AccountName: order.Account.Name,
-                taxCode: order.Account.TAX_code__c,
-                Amount: order.TotalAmount
+                TaxCode: order.Account.TAX_code__c,
+                Amount: order.TotalAmount,
+                Address: sanitizeAddress(order.ShippingStreet),
+                City: sanitizeAddress(order.ShippingCity),
+                State: sanitizeAddress(order.ShippingState),
+                PostalCode: sanitizeAddress(order.ShippingPostalCode),
+                Country: sanitizeAddress(order.ShippingCountry)
             }));
             
             await csvWriter.writeRecords(records);
@@ -183,7 +197,7 @@ async function exportToCSV(data) {
                     { id: 'SalesUM', title: 'Sales U/M' },
                     { id: 'UnitPrice', title: 'UnitPrice' },
                     { id: 'ListPrice', title: 'ListPrice' },
-                    { id: 'ProductName', title: 'ProductName' }
+                    { id: 'ProductName', title: 'ProductName' },
                 ],
                 append: hasFile,
                 alwaysQuote: true
