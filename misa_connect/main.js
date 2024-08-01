@@ -13,32 +13,32 @@ import { mainPostOrders } from './misaPostOrders.js';
 
 import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSPRODUCTS, JOB_SCHEDULE_ORDERS } from './misaConfig.js';
 
+const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
+    try {
+        await mainGetVNNAccounts()
+        await mainPostVNNAccounts()
+        console.log('2. mainPostVNNAccounts Success!');
+    } catch (error) {
+        console.error('Error posting accounts:', error);
+        taskVNNAccounts.stop();
+    }
+});
+
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainPostOrders()
-        console.log('mainPostOrders Success! ' + Date.now());
+        console.log('1. mainPostOrders Success!');
     } catch (error) {
         console.error('Error posting accounts:', error);
         taskOrders.stop();
     }
 });
 
-const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
-  try {
-      await mainGetVNNAccounts()
-      await mainPostVNNAccounts()
-      console.log('mainPostVNNAccounts Success !' + Date.now());
-  } catch (error) {
-      console.error('Error posting accounts:', error);
-      taskVNNAccounts.stop();
-  }
-});
-
 const taskVNNProducts = cron.schedule(JOB_SCHEDULE_VNNPRODUCTS, async () => {
   try {
       await mainGetVNNProducts()
       await mainPostVNNProducts()
-      console.log('mainPostVNNProducts Success! ' + Date.now());
+      console.log('3. mainPostVNNProducts Success!');
   } catch (error) {
       console.error('Error posting accounts:', error);
       taskVNNProducts.stop();
@@ -49,7 +49,7 @@ const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
   try {
       await mainGetVNSProducts()
       await mainPostVNSProducts()
-      console.log('mainPostVNSProducts Success! ' + Date.now());
+      console.log('4. mainPostVNSProducts Success!');
   } catch (error) {
       console.error('Error posting accounts:', error);
       taskVNSProducts.stop();
