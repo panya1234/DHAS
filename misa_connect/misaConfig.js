@@ -7,12 +7,12 @@ const JOB_SCHEDULE_VNNPRODUCTS = '*/1 * * * *';
 const JOB_SCHEDULE_VNSACCOUNTS = '*/1 * * * *';
 const JOB_SCHEDULE_VNSPRODUCTS = '*/1 * * * *';
 
-const READ_PATH = '/usr/src/app/CSV/READ/';
-const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
-const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
+const READ_PATH = 'CSV/READ/';
+const WRITE_PATH = 'CSV/WRITE/Orders/';
+const WRITE_CANCEL_PATH = 'CSV/WRITE/CancelOrders/';
 
-const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
-const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
+const ACCOUNT_PATH  = 'CSV/WRITE/Logs/AccountLogs/';
+const PRODUCT_PATH = 'CSV/WRITE/Logs/ProductLogs/';
 
 // const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
 // const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
