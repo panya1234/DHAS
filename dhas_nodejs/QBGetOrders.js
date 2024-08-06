@@ -129,10 +129,6 @@ async function exportToCSV(data) {
                 alwaysQuote: true
             });
 
-            const sanitizeAddress = (str) => {
-                return str.replace(/\r?\n|\r/g, ' ');
-            }
-
             const records = ordersByRole[roleName].map(order => ({
                 Id: order.Id,
                 QBSalesOrders: order.QB_Sales_Orders__c,
@@ -141,11 +137,11 @@ async function exportToCSV(data) {
                 AccountName: order.Account.Name,
                 TaxCode: order.Account.TAX_code__c,
                 Amount: order.TotalAmount,
-                Address: sanitizeAddress(order.ShippingStreet),
-                City: sanitizeAddress(order.ShippingCity),
-                State: sanitizeAddress(order.ShippingState),
-                PostalCode: sanitizeAddress(order.ShippingPostalCode),
-                Country: sanitizeAddress(order.ShippingCountry)
+                Address: order.ShippingStreet ? order.ShippingStreet.replace(/\r?\n|\r/g, ' ') : '',
+                City: order.ShippingCity ? order.ShippingCity.replace(/\r?\n|\r/g, ' ') : '',
+                State: order.ShippingState ? order.ShippingState.replace(/\r?\n|\r/g, ' ') : '',
+                PostalCode: order.ShippingPostalCode ? order.ShippingPostalCode.replace(/\r?\n|\r/g, ' ') : '',
+                Country: order.ShippingCountry ? order.ShippingCountry.replace(/\r?\n|\r/g, ' ') : ''
             }));
             
             await csvWriter.writeRecords(records);
