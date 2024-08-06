@@ -22,7 +22,8 @@ async function getTokenFromFile(filePath) {
 
 const URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 const URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
-const WRITE_PATH = './CSV/WRITE/Orders/';//test
+const WRITE_PATH = './CSV/WRITE/Orders/';//local test
+// const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';//docker test
 const GRANT_TYPE = 'client_credentials';
 const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
 const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
@@ -221,7 +222,7 @@ async function exportToCSV(data) {
 // const args = process.argv.slice(2);
 // const offset = args[0];
 
-export async function mainOrders(offset) {
+export async function maintestOrders(offset) {
     try {
         const token = await getTokenFromFile('sftoken.json');
         let orders = await getOrders(token, offset);
@@ -233,6 +234,6 @@ export async function mainOrders(offset) {
     }
 }
 
-// export { mainOrders };
+// export { maintestOrders };
 
-mainOrders();
+maintestOrders();

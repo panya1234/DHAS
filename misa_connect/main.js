@@ -14,17 +14,6 @@ import { mainPostVNSOrders } from './misaPostVNSOrders.js';
 
 import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSPRODUCTS, JOB_SCHEDULE_ORDERS } from './misaConfig.js';
 
-const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
-    try {
-        await mainGetVNNAccounts()
-        await mainPostVNNAccounts()
-        console.log('2. mainPostVNNAccounts Success!');
-    } catch (error) {
-        console.error('Error posting accounts:', error);
-        taskVNNAccounts.stop();
-    }
-});
-
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainPostVNNOrders()
@@ -36,33 +25,44 @@ const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     }
 });
 
-const taskVNNProducts = cron.schedule(JOB_SCHEDULE_VNNPRODUCTS, async () => {
-  try {
-      await mainGetVNNProducts()
-      await mainPostVNNProducts()
-      console.log('3. mainPostVNNProducts Success!');
-  } catch (error) {
-      console.error('Error posting accounts:', error);
-      taskVNNProducts.stop();
-  }
-});
+// const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
+//     try {
+//         await mainGetVNNAccounts()
+//         await mainPostVNNAccounts()
+//         console.log('2. mainPostVNNAccounts Success!');
+//     } catch (error) {
+//         console.error('Error posting accounts:', error);
+//         taskVNNAccounts.stop();
+//     }
+// });
 
-const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
-  try {
-      await mainGetVNSProducts()
-      await mainPostVNSProducts()
-      console.log('4. mainPostVNSProducts Success!');
-  } catch (error) {
-      console.error('Error posting accounts:', error);
-      taskVNSProducts.stop();
-  }
-});
+// const taskVNNProducts = cron.schedule(JOB_SCHEDULE_VNNPRODUCTS, async () => {
+//   try {
+//       await mainGetVNNProducts()
+//       await mainPostVNNProducts()
+//       console.log('3. mainPostVNNProducts Success!');
+//   } catch (error) {
+//       console.error('Error posting accounts:', error);
+//       taskVNNProducts.stop();
+//   }
+// });
+
+// const taskVNSProducts = cron.schedule(JOB_SCHEDULE_VNSPRODUCTS, async () => {
+//   try {
+//       await mainGetVNSProducts()
+//       await mainPostVNSProducts()
+//       console.log('4. mainPostVNSProducts Success!');
+//   } catch (error) {
+//       console.error('Error posting accounts:', error);
+//       taskVNSProducts.stop();
+//   }
+// });
 
 const app = express();
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+app.listen(8800, () => {
+    console.log('Server is running on port 8800');
     taskOrders.start();
-    taskVNNAccounts.start();
-    taskVNNProducts.start();
-    taskVNSProducts.start();
+    // taskVNNAccounts.start();
+    // taskVNNProducts.start();
+    // taskVNSProducts.start();
 });
