@@ -237,8 +237,8 @@ async function clearCSVFile(filePath) {
 export async function mainPostVNSOrders() {
     try {
         const token = await getTokenFromFile('misatoken.json');
-        const orderData = await readCSVFile(`${WRITE_PATH}North_Vietnam/ordersSV.csv`);
-        const productData = await readCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsSV.csv`);
+        const orderData = await readCSVFile(`${WRITE_PATH}South_Vietnam/ordersSV.csv`);
+        const productData = await readCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
 
         for (const order of orderData) {
             const products = productData.filter(product => product["Order Id"] === order["Order Id"]);
@@ -246,8 +246,8 @@ export async function mainPostVNSOrders() {
             console.log(resAccounts);
         }
 
-        await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersSV.csv`);
-        await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsSV.csv`);
+        await clearCSVFile(`${WRITE_PATH}South_Vietnam/ordersSV.csv`);
+        await clearCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
         console.log('CSV files cleared.');
 
     } catch (error) {
