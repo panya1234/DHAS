@@ -234,7 +234,7 @@ async function clearCSVFile(filePath) {
     });
 }
 
-export async function mainPostOrders() {
+export async function mainPostVNNOrders() {
     try {
         const token = await getTokenFromFile('misatoken.json');
         const orderData = await readCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);

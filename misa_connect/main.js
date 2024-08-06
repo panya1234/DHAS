@@ -9,7 +9,8 @@ import { mainPostVNNProducts } from './misaPostVNNProducts.js';
 import { mainGetVNSProducts } from './misaGetVNSProducts.js';
 import { mainPostVNSProducts } from './misaPostVNSProducts.js';
 
-import { mainPostOrders } from './misaPostOrders.js';
+import { mainPostVNNOrders } from './misaPostVNNOrders.js';
+import { mainPostVNSOrders } from './misaPostVNSOrders.js';
 
 import { JOB_SCHEDULE_VNNACCOUNTS, JOB_SCHEDULE_VNNPRODUCTS, JOB_SCHEDULE_VNSPRODUCTS, JOB_SCHEDULE_ORDERS } from './misaConfig.js';
 
@@ -26,7 +27,8 @@ const taskVNNAccounts = cron.schedule(JOB_SCHEDULE_VNNACCOUNTS, async () => {
 
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
-        await mainPostOrders()
+        await mainPostVNNOrders()
+        await mainPostVNSOrders()
         console.log('1. mainPostOrders Success!');
     } catch (error) {
         console.error('Error posting accounts:', error);
