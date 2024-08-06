@@ -10,9 +10,6 @@ import { mainCancelOrders } from './QBGetCancelOrders.js';
 import { JOB_SCHEDULE_ORDERS, JOB_SCHEDULE_INACCOUNTS, JOB_SCHEDULE_PHPACCOUNTS, JOB_SCHEDULE_CANCEL_ORDERS } from './config.js';
 import { JOB_SCHEDULE_INPRODUCTS, JOB_SCHEDULE_PHPPRODUCTS, JOB_SCHEDULE_ERROR_ORDERS } from './config.js';
 
-// test
-import { maintestOrders } from './testOrders.js';
-
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainOrders()
@@ -85,7 +82,6 @@ const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
 
 const app = express();
 app.listen(8000, () => {
-    maintestOrders();
     // mainOrders();
     // mainCancelOrders();
     // // mainErrorOrders();
