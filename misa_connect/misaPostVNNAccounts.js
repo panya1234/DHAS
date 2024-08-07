@@ -124,7 +124,7 @@ async function processChunks(filePath, token) {
 export async function mainPostVNNAccounts() {
     try {
         const token = await getTokenFromFile('sftoken.json');
-        const filePath = `${READ_PATH}VNNAccounts.csv`;
+        const filePath = `${READ_PATH}VNNaccounts.csv`;
         const results = await processChunks(filePath, token);
 
         const now = new Date();
@@ -157,4 +157,4 @@ export async function mainPostVNNAccounts() {
     }
 }
 
-// mainPostVNNAccounts();
+mainPostVNNAccounts();
