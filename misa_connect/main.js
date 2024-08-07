@@ -18,9 +18,9 @@ const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainPostVNNOrders()
         await mainPostVNSOrders()
-        console.log('1. mainPostOrders Success!');
+        console.log('1. mainPostOrders Success!'+ Date.now());
     } catch (error) {
-        console.error('Error posting accounts:' + Date.now(), error);
+        console.error('Error posting accounts:', error);
         taskOrders.stop();
     }
 });
