@@ -73,7 +73,7 @@ public class UpdatePHPSO implements QBWebConnectorSvcSoap {
         System.out.println(response);
 
         final String ERROR_FILE_PATH = "CSV/READ/errorOrders.csv";
-        final String CANCEL_FILE_PATH = "CSV/WRITE/CancelOrders/Indonesia/cancelOrdersIN.csv";
+        final String CANCEL_FILE_PATH = "CSV/WRITE/CancelOrders/Philippines/cancelOrdersPH.csv";
         try (CSVReader readerCancelSO = new CSVReader(new FileReader(ERROR_FILE_PATH))){
                         List<String[]> allRows = readerCancelSO.readAll();
             readerCancelSO.skip(1);
@@ -177,7 +177,7 @@ public class UpdatePHPSO implements QBWebConnectorSvcSoap {
 
         StringBuilder queryBuilder = new StringBuilder();
         queryBuilder.append("<?xml version=\"1.0\" encoding=\"utf-8\"?><?qbxml version=\"13.0\"?><QBXML><QBXMLMsgsRq onError=\"stopOnError\">");
-        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Philippines/cancelOrdersPHP.csv";
+        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Philippines/cancelOrdersPH.csv";
         try (CSVReader readerCancelSO = new CSVReader(new FileReader(FILE_CANCAL_PATH))){
             readerCancelSO.skip(1);
 

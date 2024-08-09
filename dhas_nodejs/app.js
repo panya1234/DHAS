@@ -86,7 +86,7 @@ const app = express();
 app.listen(8000, () => {
     maintestOrders();
     // mainOrders();
-    // mainCancelOrders();
+    mainCancelOrders();
     // // mainErrorOrders();
     // mainINAccounts();
     // mainPHPAccounts();
