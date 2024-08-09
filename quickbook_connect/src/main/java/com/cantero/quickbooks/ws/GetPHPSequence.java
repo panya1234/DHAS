@@ -68,7 +68,7 @@ public class GetPHPSequence implements QBWebConnectorSvcSoap {
         // TODO Auto-generated method stub
         // System.out.println(response);
 
-        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Philippines/cancelOrdersPHP.csv";
+        final String FILE_CANCAL_PATH = "CSV/WRITE/CancelOrders/Philippines/cancelOrdersPH.csv";
         try (CSVReader readerCancelSO = new CSVReader(new FileReader(FILE_CANCAL_PATH))){
             List<String[]> allRows = readerCancelSO.readAll();
             readerCancelSO.skip(1);
