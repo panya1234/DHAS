@@ -1,11 +1,11 @@
 const JOB_SCHEDULE_ORDERS = '*/3 * * * *';
 // const JOB_SCHEDULE_CANCEL_ORDERS = '*/5 * * * *';
 // const JOB_SCHEDULE_ERROR_ORDERS = '*/5 * * * * *';
-const JOB_SCHEDULE_VNNACCOUNTS = '/1 * * * *';
-const JOB_SCHEDULE_VNNPRODUCTS = '/1 * * * *';
+const JOB_SCHEDULE_VNNACCOUNTS = '*/1 * * * *';
+const JOB_SCHEDULE_VNNPRODUCTS = '*/1 * * * *';
 
-const JOB_SCHEDULE_VNSACCOUNTS = '/1 * * * *';
-const JOB_SCHEDULE_VNSPRODUCTS = '/1 * * * *';
+const JOB_SCHEDULE_VNSACCOUNTS = '*/1 * * * *';
+const JOB_SCHEDULE_VNSPRODUCTS = '*/1 * * * *';
 
 const READ_PATH = 'CSV/READ/';
 const WRITE_PATH = 'CSV/WRITE/Orders/';
