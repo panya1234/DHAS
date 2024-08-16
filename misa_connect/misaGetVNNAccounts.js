@@ -1,7 +1,7 @@
 import axios from "axios";
 import fs from 'fs';
 import { READ_PATH, URL, URL_TOKEN } from './misaConfig.js';
-import { APP_ID, ACCESS_CODE, ORG_COMPANY_CODE } from './misaConfig.js';
+import { APP_ID, ACCESS_CODE_PATH, ORG_COMPANY_CODE } from './misaConfig.js';
 
 async function getTokenFromFile(filePath) {
     return new Promise((resolve, reject) => {
@@ -20,12 +20,30 @@ async function getTokenFromFile(filePath) {
     });
 }
 
+async function getAccessCodeFromFile(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            try {
+                const tokenData = JSON.parse(data);
+                resolve(tokenData.accessCode);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    });
+}
+
 async function refreshToken() {
     try {
+        const accessCode = await getAccessCodeFromFile(`${ACCESS_CODE_PATH}accessCode.json`);       
         const response = await axios.post(URL_TOKEN, 
             {
                 app_id: APP_ID,
-                access_code: ACCESS_CODE,
+                access_code: accessCode,
                 org_company_code: ORG_COMPANY_CODE
             }, 
             {
@@ -69,6 +87,12 @@ async function getVNNAccounts(token, skip, take) {
                     'Content-Type': 'application/json'
                 }
             });
+            if (response.data.ErrorCode == 'ExpiredToken') {
+                const newToken = await refreshToken();
+                const skip = 0;
+                const take = 100;
+                return await getPaymentTerms(newToken, skip, take);
+            }
         return response.data;
     } catch (error) {
         console.error(error);

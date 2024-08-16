@@ -2,12 +2,14 @@ import axios from 'axios';
 import fs from 'fs';
 import qs from 'qs';
 
+const ACCESS_CODE = 'fPPtoxcHSQ+OH5D9gjOchOssdsmXfcPaI23eP9OaOLMcKvcC0uduvV2zG+GbHjArunQcCbqo2ALR7BLv3mkCdKy2XpMw87nGTK9hBYQcS5JIIshyWDQOrV7/wKVzb00ZALw06szwIjZcIXARYEXX9pJ7s6nHjvtC9qHFek8Q5ZulZFKsiuUWen07qOnDHg7TZshwcx9O2qVyna303WJe6Q==';
+
 async function getToken() {
     try {
         const response = await axios.post('https://actapp.misa.vn/api/oauth/actopen/connect', 
             {
                 app_id: '5f4a649a-af16-4d98-afa0-3554314642da',
-                access_code: 'NtIFcB2K0dVPwhPC9bCOw6pWGJ3cdNZxl0jbV1MA+0Ie3rDXt56p0lAPb7XiIKbsNRlAoS7jZrUhNfH//CxOezOAP0ZepaJHCtSClFJr72mdhmTVG3YKCvOxMtLWBg6XIEixPZmGAqb8J9mz3mAzTKfTHupvNieLDGm7InXkLWkkNS1ljLn4Je8AxF6pXv4jpvx7ofEsSY4TFyAcSIhF3Vq/FKhx+2i17hXFjQ9RQqZhEN9QDLl1T8W3Vcj1Q/mYTejfFPD8alzgep1G8o83FA==',
+                access_code: 'GcFALtS2KhIZAZV/dUWVNQDEcExub4V0U0M2LJ/q1AGgfjmOiG2gfjPxuhXDTpgNzOCC3LC+GlHnov5DKCfs6PjvZwMdLIGKINyBj08xai66/ySdyVF2ILBbEEvNSbiliedd3B+37U54YvYOPpTR01LXJwbnxTIUy2iYRi8tbzBdeTy2CF+4ofeBsHz5jlntyel4k/SIBMgBZGDoO/FmXHuxfBAW/mzfkRDF3JmgW7jLEI00e7HSzQFgdj9lAUOx9EqcHZ0y9m1vh9fl4gFhkA==',
                 org_company_code: 'congtydemoketnoiact'
             }, 
             {
@@ -42,4 +44,4 @@ export async function mainGetToken() {
 
 // export { mainGetToken };
 
-mainGetToken();
+// mainGetToken();

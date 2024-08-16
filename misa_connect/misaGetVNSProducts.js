@@ -57,7 +57,8 @@ async function getVNSProducts(token, skip, take) {
             {
                 app_id: "5f4a649a-af16-4d98-afa0-3554314642da",
                 org_company_code: "congtydemoketnoiact",
-                stock_id: "7d82508d-a811-42c3-beb4-6a8a7b3c7e76",
+                // stock_id: "7d82508d-a811-42c3-beb4-6a8a7b3c7e76",//UAT
+                stock_id: "b7a8788c-c4f6-43c8-81d4-6c9966c87395",
                 branch_id: null,
                 skip: skip,
                 take: take,

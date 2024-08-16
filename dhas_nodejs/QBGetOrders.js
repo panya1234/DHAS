@@ -3,7 +3,7 @@ import fs from 'fs';
 import { createObjectCsvWriter } from 'csv-writer';
 import qs from 'qs';
 import { WRITE_PATH , URL, URL_TOKEN } from './config.js';
-import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET } from './config.js';
+import { GRANT_TYPE, CLIENT_ID, CLIENT_SECRET, ACCESS_CODE_PATH } from './config.js';
 
 async function getTokenFromFile(filePath) {
     return new Promise((resolve, reject) => {
@@ -188,7 +188,8 @@ async function exportToCSV(data) {
                     { id: 'SalesUM', title: 'Sales U/M' },
                     { id: 'UnitPrice', title: 'UnitPrice' },
                     { id: 'ListPrice', title: 'ListPrice' },
-                    { id: 'ProductName', title: 'ProductName' }
+                    { id: 'ProductName', title: 'ProductName' },
+                    { id: 'Conversion', title: 'Conversion' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -202,7 +203,8 @@ async function exportToCSV(data) {
                 SalesUM: orderLine.Product2.Sales_U_M__c,
                 UnitPrice: orderLine.UnitPrice,
                 ListPrice: orderLine.ListPrice,
-                ProductName: orderLine.Product2.Name
+                ProductName: orderLine.Product2.Name,
+                Conversion: orderLine.Product2.Conversion__c
             }));
 
             await csvWriter.writeRecords(records);
@@ -219,6 +221,13 @@ export async function mainOrders(offset) {
     try {
         const token = await getTokenFromFile('sftoken.json');
         let orders = await getOrders(token, offset);
+
+        if (orders && orders.accessCode) {
+            fs.writeFile(`${ACCESS_CODE_PATH}accessCode.json`, JSON.stringify({ accessCode: orders.accessCode }), (err) => {
+                if (err) throw err;
+                console.log('Access code saved to accessCode.json.');
+            });
+        }
 
         await exportToCSV(orders);
         return { data: orders };

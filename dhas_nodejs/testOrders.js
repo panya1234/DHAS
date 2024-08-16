@@ -22,8 +22,9 @@ async function getTokenFromFile(filePath) {
 
 const URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 const URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
-// const WRITE_PATH = './CSV/WRITE/Orders/';//local test
-const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';//docker test
+const WRITE_PATH = './CSV/WRITE/Orders/';//local test
+const ACCESS_CODE_PATH = './CSV/'//test;
+// const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';//docker test
 const GRANT_TYPE = 'client_credentials';
 const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
 const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
@@ -195,6 +196,7 @@ async function exportToCSV(data) {
                     { id: 'UnitPrice', title: 'UnitPrice' },
                     { id: 'ListPrice', title: 'ListPrice' },
                     { id: 'ProductName', title: 'ProductName' },
+                    { id: 'Conversion', title: 'Conversion' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -208,7 +210,8 @@ async function exportToCSV(data) {
                 SalesUM: orderLine.Product2.Sales_U_M__c,
                 UnitPrice: orderLine.UnitPrice,
                 ListPrice: orderLine.ListPrice,
-                ProductName: orderLine.Product2.Name
+                ProductName: orderLine.Product2.Name,
+                Conversion: orderLine.Product2.Conversion__c
             }));
 
             await csvWriter.writeRecords(records);
@@ -226,7 +229,15 @@ export async function maintestOrders(offset) {
     try {
         const token = await getTokenFromFile('sftoken.json');
         let orders = await getOrders(token, offset);
+        console.log(orders);
 
+        if (orders && orders.accessCode) {
+            fs.writeFile(`${ACCESS_CODE_PATH}accessCode.json`, JSON.stringify({ accessCode: orders.accessCode }), (err) => {
+                if (err) throw err;
+                console.log('Access code saved to accessCode.json.');
+            });
+        }
+        
         await exportToCSV(orders);
         return { data: orders };
     } catch (error) {
@@ -236,4 +247,4 @@ export async function maintestOrders(offset) {
 
 // export { maintestOrders };
 
-// maintestOrders();
+maintestOrders();

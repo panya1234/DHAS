@@ -9,6 +9,8 @@ const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
 // path csv
+const ACCESS_CODE_PATH = '/usr/src/app/CSV/';
+// const ACCESS_CODE_PATH = './CSV/'//test;
 const READ_PATH = '/usr/src/app/CSV/READ/';
 // const READ_PATH = './CSV/READ/'//test;
 const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
@@ -66,6 +68,7 @@ export { JOB_SCHEDULE_INPRODUCTS };
 export { JOB_SCHEDULE_PHPACCOUNTS };
 export { JOB_SCHEDULE_PHPPRODUCTS };
 
+export { ACCESS_CODE_PATH };
 export { READ_PATH };
 export { WRITE_PATH };
 export { WRITE_CANCEL_PATH };

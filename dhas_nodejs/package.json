@@ -16,6 +16,7 @@
     "csv": "^6.3.8",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
+    "dhas_nodejs": "file:",
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "node-cron": "^3.0.3",

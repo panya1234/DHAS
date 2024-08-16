@@ -57,7 +57,8 @@ async function getVNNProducts(token, skip, take) {
             {
                 app_id: "5f4a649a-af16-4d98-afa0-3554314642da",
                 org_company_code: "congtydemoketnoiact",
-                stock_id: "35f0b26a-9978-49f3-bd56-4e56933bebf7",
+                // stock_id: "35f0b26a-9978-49f3-bd56-4e56933bebf7",//UAT
+                stock_id: "5f181ba7-e3b3-4b59-8061-51336bf008c0",
                 branch_id: null,
                 skip: skip,
                 take: take,
