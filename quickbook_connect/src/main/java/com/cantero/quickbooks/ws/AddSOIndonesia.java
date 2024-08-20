@@ -254,19 +254,26 @@ public class AddSOIndonesia implements QBWebConnectorSvcSoap {
                 if (row.length > 0 && row[0].equals(sOItemId)) { 
                     String itemName = row[1];
                     String quantity = row[3];
+                    double quantityToDouble = Double.parseDouble(quantity);
+
                     String unit = row[4];
                     String unitPrice = row[5];
                     double price = Double.parseDouble(unitPrice);
                     String formattedPrice = String.format("%.2f", price);
                     String listPrice = row[6];
+                    String conversion = row[8];
+                    double conversionLate = Double.parseDouble(conversion);
+                    double quantityConversionLate = quantityToDouble * conversionLate;
+                    double priceConversionLate = price / conversionLate;
+                    String priceConversionLateStr = String.format("%.5f", priceConversionLate);
 
                     queryBuilder.append("<SalesOrderLineAdd>");
                     queryBuilder.append("<ItemRef><FullName>").append(itemName).append("</FullName></ItemRef>");
                     if (!itemName.equals("STD001") &&  !itemName.equals("TSD0001")) {
-                        queryBuilder.append("<Quantity>").append(quantity).append("</Quantity>");
+                        queryBuilder.append("<Quantity>").append(quantityConversionLate).append("</Quantity>");
                     }
                     queryBuilder.append("<UnitOfMeasure>").append(unit).append("</UnitOfMeasure>");
-                    queryBuilder.append("<Rate>").append(formattedPrice).append("</Rate>");
+                    queryBuilder.append("<Rate>").append(priceConversionLateStr).append("</Rate>");
                     queryBuilder.append("<DataExt><OwnerID>0</OwnerID><DataExtName>Unit Price</DataExtName><DataExtValue>").append(listPrice).append("</DataExtValue></DataExt>");
                     queryBuilder.append("</SalesOrderLineAdd>");
                 }
