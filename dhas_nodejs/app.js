@@ -84,8 +84,8 @@ const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
 
 const app = express();
 app.listen(8000, () => {
-    maintestOrders();
-    // mainOrders();
+    // maintestOrders();
+    mainOrders();
     mainCancelOrders();
     // // mainErrorOrders();
     // mainINAccounts();
