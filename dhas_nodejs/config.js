@@ -1,5 +1,5 @@
 // time to work
-const JOB_SCHEDULE_ORDERS = '*/4 * * * *';
+const JOB_SCHEDULE_ORDERS = '*/3 * * * *';
 const JOB_SCHEDULE_CANCEL_ORDERS = '*/5 * * * *';
 const JOB_SCHEDULE_ERROR_ORDERS = '*/5 * * * * *';
 const JOB_SCHEDULE_INACCOUNTS = '30 4 * * *';
