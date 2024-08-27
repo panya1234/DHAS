@@ -91,8 +91,9 @@ public class UpdateINSO implements QBWebConnectorSvcSoap {
                     String refNumber = element.getElementsByTagName("RefNumber").item(0).getTextContent();
                     for (int j = 0; j < allRows.size(); j++) {
                         String[] row = allRows.get(j);
-                        if (row.length > 0 && row[2].equals(refNumber)) { 
-                            allRows.remove(j);
+                        if (row.length > 0 && row[2].equals(refNumber)) {
+                            String[] rowAfterHeader = allRows.remove(1);
+                            allRows.remove(rowAfterHeader);
                             break; 
                         }
                     }

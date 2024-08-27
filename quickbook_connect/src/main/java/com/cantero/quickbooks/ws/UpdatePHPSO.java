@@ -92,7 +92,8 @@ public class UpdatePHPSO implements QBWebConnectorSvcSoap {
                     for (int j = 0; j < allRows.size(); j++) {
                         String[] row = allRows.get(j);
                         if (row.length > 0 && row[2].equals(refNumber)) { 
-                            allRows.remove(j);
+                            String[] rowAfterHeader = allRows.remove(1);
+                            allRows.remove(rowAfterHeader);
                             break; 
                         }
                     }
