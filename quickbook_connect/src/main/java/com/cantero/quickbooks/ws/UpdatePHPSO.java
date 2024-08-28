@@ -89,7 +89,7 @@ public class UpdatePHPSO implements QBWebConnectorSvcSoap {
 
                 if (statusSeverity.contains("Info")) {
                     String refNumber = element.getElementsByTagName("RefNumber").item(0).getTextContent();
-                    for (int j = 1; j < allRows.size(); j++) {
+                    for (int j = 0; j < allRows.size(); j++) {
                         String[] row = allRows.get(j);
                         if (row.length > 0 && row[2].equals(refNumber)) { 
                             allRows.remove(j);
