@@ -8,25 +8,23 @@ const JOB_SCHEDULE_INPRODUCTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
-// path csv
+// 
 const ACCESS_CODE_PATH = '/usr/src/app/CSV/';
-// const ACCESS_CODE_PATH = './CSV/'//test;
 const READ_PATH = '/usr/src/app/CSV/READ/';
-// const READ_PATH = './CSV/READ/'//test;
 const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
-// const WRITE_PATH = './CSV/WRITE/Orders/';//test
 const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
-// const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
-
-// path log
 const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
 const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
-
-// const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';test
-// const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';test
-
-// path error orders
 const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
+
+// 
+// const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';//test
+// const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';//test
+// const ACCESS_CODE_PATH = './CSV/'//test;
+// const READ_PATH = './CSV/READ/'//test;
+// const WRITE_PATH = './CSV/WRITE/Orders/';//test
+// const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
+// const ERROR_ORDER_PATH = './CSV/WRITE/Logs/OrderLogs/';//test
 
 // oauth2 info
 //sandbox
