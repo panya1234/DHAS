@@ -2,7 +2,7 @@ import axios from 'axios';
 import fs from 'fs';
 import csv from 'csv-parser';
 import { WRITE_PATH, URL, URL_TOKEN } from './misaConfig.js';
-import { APP_ID, ACCESS_CODE, ORG_COMPANY_CODE } from './misaConfig.js';
+import { APP_ID, ACCESS_CODE_PATH, ORG_COMPANY_CODE } from './misaConfig.js';
 
 function getFormattedDate() {
     const date = new Date();
@@ -63,12 +63,30 @@ async function getTokenFromFile(filePath) {
     });
 }
 
+async function getAccessCodeFromFile(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            try {
+                const tokenData = JSON.parse(data);
+                resolve(tokenData.accessCode);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    });
+}
+
 async function refreshToken() {
     try {
+        const accessCode = await getAccessCodeFromFile(`${ACCESS_CODE_PATH}accessCode.json`);       
         const response = await axios.post(URL_TOKEN, 
             {
                 app_id: APP_ID,
-                access_code: ACCESS_CODE,
+                access_code: accessCode,
                 org_company_code: ORG_COMPANY_CODE
             }, 
             {
@@ -104,6 +122,9 @@ function createVoucherJSON(order, products) {
         const productName = product.ProductName;
         const productCode = product["Product Code"];
         const lineAmount = parseFloat((quantity * unit_price).toFixed(2));
+
+        const vat = parseInt(product.Vat);
+        const vatAmount = parseInt((unit_price * (vat/100)).toFixed(2));
         return {
             sort_order: index + 1,
             is_promotion: false,
@@ -112,7 +133,6 @@ function createVoucherJSON(order, products) {
             amount_oc: lineAmount,
             amount: lineAmount,
             main_convert_rate: 1.0,
-            vat_rate: -1.0,
             stock_code: whereHouse,
             main_unit_price: unit_price,
             description: productName,
@@ -130,10 +150,16 @@ function createVoucherJSON(order, products) {
             crm_id: "230",
             is_follow_serial_number: false,
             is_allow_duplicate_serial_number: false,
+            organization_unit_code: order["SalesUit"],
+            vat_rate: vat,
+            vat_amount: vatAmount,
+            vat_amount_oc: vatAmount,
             state: 0
         };
     });
 
+    const address = order["bAddress"]+" "+order["bCity"]+" "+order["bState"]+" "+order["bPostalCode"]+" "+order["bCountry"];
+    const shipAddress =  order["Address"]+" "+order["City"]+" "+order["State"]+" "+order["PostalCode"]+" "+order["Country"];
     const voucherJSON = {
         org_company_code: "congtydemoketnoiact",
         app_id: APP_ID,
@@ -151,6 +177,8 @@ function createVoucherJSON(order, products) {
                 act_voucher_type: 0,
                 refid: generateUUID(),
                 status: 1,
+                account_object_address: address,
+                shipping_address: shipAddress,
                 delivered_status: 2,
                 due_day: 0,
                 refdate: getFormattedDate(),
@@ -161,6 +189,7 @@ function createVoucherJSON(order, products) {
                 account_object_name: order["AccountName"],
                 account_object_code: order["AccountCode"],
                 account_object_tax_code: order["taxCode"],
+                employee_name: order["SalesAgent"],
                 currency_id: "VND",
                 discount_type: 0,
                 discount_rate_voucher: 0.0,
@@ -246,8 +275,8 @@ export async function mainPostVNNOrders() {
             console.log(resAccounts);
         }
 
-        await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
-        await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
+        // await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
+        // await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
         console.log('CSV files cleared.');
 
     } catch (error) {
@@ -255,4 +284,4 @@ export async function mainPostVNNOrders() {
     }
 }
 
-// mainPostOrders();
+// mainPostVNNOrders();

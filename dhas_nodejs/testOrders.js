@@ -132,7 +132,14 @@ async function exportToCSV(data) {
                     { id: 'City', title: 'City' },
                     { id: 'State', title: 'State' },
                     { id: 'PostalCode', title: 'PostalCode' },
-                    { id: 'Country', title: 'Country' }
+                    { id: 'Country', title: 'Country' },
+                    { id: 'bAddress', title: 'bAddress' },
+                    { id: 'bCity', title: 'bCity' },
+                    { id: 'bState', title: 'bState' },
+                    { id: 'bPostalCode', title: 'bPostalCode' },
+                    { id: 'bCountry', title: 'bCountry' },
+                    { id: 'SalesAgent', title: 'SalesAgent' },
+                    { id: 'SalesUit', title: 'SalesUit' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -150,7 +157,14 @@ async function exportToCSV(data) {
                 City: order.ShippingCity ? order.ShippingCity.replace(/\r?\n|\r/g, ' ') : '',
                 State: order.ShippingState ? order.ShippingState.replace(/\r?\n|\r/g, ' ') : '',
                 PostalCode: order.ShippingPostalCode ? order.ShippingPostalCode.replace(/\r?\n|\r/g, ' ') : '',
-                Country: order.ShippingCountry ? order.ShippingCountry.replace(/\r?\n|\r/g, ' ') : ''
+                Country: order.ShippingCountry ? order.ShippingCountry.replace(/\r?\n|\r/g, ' ') : '',
+                bAddress: order.BillingStreet ? order.BillingStreet.replace(/\r?\n|\r/g, ' ') : '',
+                bCity: order.BillingCity ? order.BillingCity.replace(/\r?\n|\r/g, ' ') : '',
+                bState: order.BillingState ? order.BillingState.replace(/\r?\n|\r/g, ' ') : '',
+                bPostalCode: order.BillingPostalCode ? order.BillingPostalCode.replace(/\r?\n|\r/g, ' ') : '',
+                bCountry: order.BillingCountry ? order.BillingCountry.replace(/\r?\n|\r/g, ' ') : '',
+                SalesAgent: order.Sales_Agent__c,
+                SalesUit: order.Sales_Unit__c 
             }));
             
             await csvWriter.writeRecords(records);
@@ -198,7 +212,8 @@ async function exportToCSV(data) {
                     { id: 'UnitPrice', title: 'UnitPrice' },
                     { id: 'ListPrice', title: 'ListPrice' },
                     { id: 'ProductName', title: 'ProductName' },
-                    { id: 'Conversion', title: 'Conversion' }
+                    { id: 'Conversion', title: 'Conversion' },
+                    { id: 'Vat', title: 'Vat' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -213,7 +228,8 @@ async function exportToCSV(data) {
                 UnitPrice: orderLine.UnitPrice,
                 ListPrice: orderLine.ListPrice,
                 ProductName: orderLine.Product2.Name,
-                Conversion: orderLine.Product2.Conversion__c
+                Conversion: orderLine.Product2.Conversion__c,
+                Vat: orderLine.Vat__c
             }));
 
             await csvWriter.writeRecords(records);
