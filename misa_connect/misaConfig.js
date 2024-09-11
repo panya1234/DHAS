@@ -7,6 +7,8 @@ const JOB_SCHEDULE_VNNPRODUCTS = '30 4 * * *';
 const JOB_SCHEDULE_VNSACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_VNSPRODUCTS = '30 4 * * *';
 
+const JOB_SCHEDULE_TOKEN = '* */4 * * *';
+
 const ACCESS_CODE_PATH = 'CSV/';
 const READ_PATH = 'CSV/READ/';
 const WRITE_PATH = 'CSV/WRITE/Orders/';
@@ -92,4 +94,4 @@ export { WRITE_CANCEL_PATH };
 export { ACCOUNT_PATH };
 export { PRODUCT_PATH };
 
-// export { ERROR_ORDER_PATH };
+export { JOB_SCHEDULE_TOKEN };

@@ -1,15 +1,32 @@
 import axios from 'axios';
 import fs from 'fs';
 import qs from 'qs';
+import { ACCESS_CODE_PATH } from './misaConfig.js';
 
-const ACCESS_CODE = 'UA8F+gXB3wD+HnTAZ3JxM4RZdfqcCq/1N/SL44aIJntq4yyjBRRAFRj2a79cmTDZKkJ0cacCkTD1VULIqtZ/zVBpLbDTiuwwKv74TtiExWEDTeu/FWRft3D5xKbU+ZYbWq0++/qLsfJpPgnWo1hPVezCVBKrjjaMp8MhFlgWCsklZQiJGDoQmFxpmVOq9k6mthA/iVrHURixsweuCGB2jiJuGU0+NDc3rSySqO5PXDOsNBbf5QVnyDszjpXN8LEhGCRmv+25b3NcL4WjIrBZOw==';
+async function getAccessCodeFromFile(filePath) {
+    return new Promise((resolve, reject) => {
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            try {
+                const tokenData = JSON.parse(data);
+                resolve(tokenData.accessCode);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    });
+}
 
 async function getToken() {
     try {
+        const accessCode = await getAccessCodeFromFile(`${ACCESS_CODE_PATH}accessCode.json`);       
         const response = await axios.post('https://actapp.misa.vn/api/oauth/actopen/connect', 
             {
                 app_id: '5f4a649a-af16-4d98-afa0-3554314642da',
-                access_code: ACCESS_CODE,
+                access_code: accessCode,
                 org_company_code: 'congtydemoketnoiact'
             }, 
             {
@@ -44,4 +61,4 @@ export async function mainGetToken() {
 
 // export { mainGetToken };
 
-mainGetToken();
+// mainGetToken();
