@@ -275,8 +275,8 @@ export async function mainPostVNNOrders() {
             console.log(resAccounts);
         }
 
-        // await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
-        // await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
+        await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
+        await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
         console.log('CSV files cleared.');
 
     } catch (error) {
