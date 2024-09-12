@@ -269,15 +269,19 @@ export async function mainPostVNSOrders() {
         const orderData = await readCSVFile(`${WRITE_PATH}South_Vietnam/ordersSV.csv`);
         const productData = await readCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
 
+        let success = '';
         for (const order of orderData) {
             const products = productData.filter(product => product["Order Id"] === order["Order Id"]);
             const resAccounts = await postOrders(order, products, token);
             console.log(resAccounts);
+            success = resAccounts.Success;
         }
-
-        await clearCSVFile(`${WRITE_PATH}South_Vietnam/ordersSV.csv`);
-        await clearCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
-        console.log('CSV files cleared.');
+        if (success) {
+            await clearCSVFile(`${WRITE_PATH}South_Vietnam/ordersSV.csv`);
+            await clearCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
+            console.log('South_Vietnam_CSV files cleared.');
+        }
+        
 
     } catch (error) {
         console.error('Error in main:', error);

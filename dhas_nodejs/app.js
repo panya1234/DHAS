@@ -15,6 +15,7 @@ import { maintestOrders } from './testOrders.js';
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainOrders()
+        await maintestOrders()
         // console.log('Order geted successfully.');
     } catch (error) {
         console.error('Error getting accounts:', error);
