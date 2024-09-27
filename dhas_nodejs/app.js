@@ -15,7 +15,7 @@ import { maintestOrders } from './testOrders.js';
 const taskOrders = cron.schedule(JOB_SCHEDULE_ORDERS, async () => {
     try {
         await mainOrders()
-        await maintestOrders()
+        // await maintestOrders()
         // console.log('Order geted successfully.');
     } catch (error) {
         console.error('Error getting accounts:', error);
@@ -85,7 +85,7 @@ const taskErrorOrders = cron.schedule(JOB_SCHEDULE_ERROR_ORDERS, async () => {
 
 const app = express();
 app.listen(8000, () => {
-    maintestOrders();
+    // maintestOrders();
     mainOrders();
     mainCancelOrders();
     // // mainErrorOrders();
