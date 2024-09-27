@@ -190,6 +190,7 @@ function createVoucherJSON(order, products) {
                 account_object_code: order["AccountCode"],
                 account_object_tax_code: order["taxCode"],
                 employee_name: order["SalesAgent"],
+                employee_code: order["SalesAgentCode"],
                 currency_id: "VND",
                 discount_type: 0,
                 discount_rate_voucher: 0.0,

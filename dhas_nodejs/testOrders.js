@@ -139,7 +139,8 @@ async function exportToCSV(data) {
                     { id: 'bPostalCode', title: 'bPostalCode' },
                     { id: 'bCountry', title: 'bCountry' },
                     { id: 'SalesAgent', title: 'SalesAgent' },
-                    { id: 'SalesUit', title: 'SalesUit' }
+                    { id: 'SalesUit', title: 'SalesUit' },
+                    { id: 'SalesAgentCode', title: 'SalesAgentCode' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -164,7 +165,8 @@ async function exportToCSV(data) {
                 bPostalCode: order.BillingPostalCode ? order.BillingPostalCode.replace(/\r?\n|\r/g, ' ') : '',
                 bCountry: order.BillingCountry ? order.BillingCountry.replace(/\r?\n|\r/g, ' ') : '',
                 SalesAgent: order.Sales_Agent__c,
-                SalesUit: order.Sales_Unit__c 
+                SalesUit: order.Sales_Unit__c,
+                SalesAgentCode: order.Sales_Agent_Code__c,
             }));
             
             await csvWriter.writeRecords(records);
