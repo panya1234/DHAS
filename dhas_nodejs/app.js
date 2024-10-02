@@ -89,9 +89,9 @@ app.listen(8000, () => {
     mainOrders();
     mainCancelOrders();
     // // mainErrorOrders();
-    // mainINAccounts();
-    // mainPHPAccounts();
-    // mainINProducts();
-    // mainPHPProducts();
+    mainINAccounts();
+    mainPHPAccounts();
+    mainINProducts();
+    mainPHPProducts();
     console.log('Server is running on port 8080');
 });
