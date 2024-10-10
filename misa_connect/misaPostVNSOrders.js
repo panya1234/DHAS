@@ -129,6 +129,7 @@ function createVoucherJSON(order, products) {
             sort_order: index + 1,
             is_promotion: false,
             quantity: quantity,
+            main_quantity:quantity,
             unit_price: unit_price,
             amount_oc: lineAmount,
             amount: lineAmount,
@@ -190,6 +191,7 @@ function createVoucherJSON(order, products) {
                 account_object_code: order["AccountCode"],
                 account_object_tax_code: order["taxCode"],
                 employee_name: order["SalesAgent"],
+                employee_code: order["SalesAgentCode"],
                 currency_id: "VND",
                 discount_type: 0,
                 discount_rate_voucher: 0.0,
@@ -217,6 +219,7 @@ function createVoucherJSON(order, products) {
                 created_by: "SF",
                 modified_date: getFormattedDate(),
                 auto_refno: false,
+                payment_term_name: order["Term"],
                 state: 0
             }
         ]
@@ -281,8 +284,6 @@ export async function mainPostVNSOrders() {
             await clearCSVFile(`${WRITE_PATH}South_Vietnam/orderItemsSV.csv`);
             console.log('South_Vietnam_CSV files cleared.');
         }
-        
-
     } catch (error) {
         console.error('Error in main:', error);
     }

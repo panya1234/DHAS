@@ -131,7 +131,8 @@ async function exportToCSV(data) {
                     { id: 'bCountry', title: 'bCountry' },
                     { id: 'SalesAgent', title: 'SalesAgent' },
                     { id: 'SalesUit', title: 'SalesUit' },
-                    { id: 'SalesAgentCode', title: 'SalesAgentCode' }
+                    { id: 'SalesAgentCode', title: 'SalesAgentCode' },
+                    { id: 'Term', title: 'Term' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -158,6 +159,7 @@ async function exportToCSV(data) {
                 SalesAgent: order.Sales_Agent__c,
                 SalesUit: order.Sales_Unit__c,
                 SalesAgentCode: order.Sales_Agent_Code__c,
+                Term: order.Account.Credit__c
             }));
             
             await csvWriter.writeRecords(records);

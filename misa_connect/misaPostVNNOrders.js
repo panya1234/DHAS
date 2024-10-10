@@ -129,6 +129,7 @@ function createVoucherJSON(order, products) {
             sort_order: index + 1,
             is_promotion: false,
             quantity: quantity,
+            main_quantity:quantity,
             unit_price: unit_price,
             amount_oc: lineAmount,
             amount: lineAmount,
@@ -218,6 +219,7 @@ function createVoucherJSON(order, products) {
                 created_by: "SF",
                 modified_date: getFormattedDate(),
                 auto_refno: false,
+                payment_term_name: order["Term"],
                 state: 0
             }
         ]
