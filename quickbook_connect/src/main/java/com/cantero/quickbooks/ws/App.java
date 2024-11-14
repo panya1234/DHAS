@@ -50,5 +50,8 @@ public class App {
 
         Endpoint.publish("http://0.0.0.0:8080/UpdatePHPSO", new UpdatePHPSO());
         System.out.println("UpdatePHPSO ");
+
+        // Endpoint.publish("http://localhost:8000/AddSOPhilippines", new AddSOPhilippines());
+        // System.out.println("AddSOPhilippines ");
     }
 } // or the version compatible with your JDK
