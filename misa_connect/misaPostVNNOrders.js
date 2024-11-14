@@ -220,6 +220,7 @@ function createVoucherJSON(order, products) {
                 modified_date: getFormattedDate(),
                 auto_refno: false,
                 payment_term_name: order["Term"],
+                payment_term_id: order["TermId"],
                 state: 0
             }
         ]
@@ -231,6 +232,7 @@ function createVoucherJSON(order, products) {
 async function postOrders(order, products, token) {
     try {
         const voucherJSON = createVoucherJSON(order, products);
+        // console.log('Voucher JSON:', JSON.stringify(voucherJSON, null, 2));
         const response = await axios.post(`${URL}save`,
             voucherJSON,
             {
@@ -271,7 +273,7 @@ export async function mainPostVNNOrders() {
         const token = await getTokenFromFile('misatoken.json');
         const orderData = await readCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
         const productData = await readCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
- 
+        
         let success = '';
         for (const order of orderData) {
             const products = productData.filter(product => product["Order Id"] === order["Order Id"]);
@@ -280,8 +282,8 @@ export async function mainPostVNNOrders() {
             success = resAccounts.Success;
         }
         if (success) {
-            await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
-            await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
+            // await clearCSVFile(`${WRITE_PATH}North_Vietnam/ordersNV.csv`);
+            // await clearCSVFile(`${WRITE_PATH}North_Vietnam/orderItemsNV.csv`);
             console.log('North_Vietnam_CSV files cleared.');
         }
     } catch (error) {

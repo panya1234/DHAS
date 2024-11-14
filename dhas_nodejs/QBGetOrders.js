@@ -159,7 +159,8 @@ async function exportToCSV(data) {
                 SalesAgent: order.Sales_Agent__c,
                 SalesUit: order.Sales_Unit__c,
                 SalesAgentCode: order.Sales_Agent_Code__c,
-                Term: order.Account.Credit__c
+                Term: order.Account.Credit__c,
+                TermId: order.Term_Id__c
             }));
             
             await csvWriter.writeRecords(records);

@@ -23,9 +23,9 @@ async function getTokenFromFile(filePath) {
 const URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 const URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 // const WRITE_PATH = './CSV/WRITE/Orders/';//local test
-// const ACCESS_CODE_PATH = './CSV/'//test;
+// const ACCESS_CODE_PATH = './CSV/'//local test;
 
-const ACCESS_CODE_PATH = '/usr/src/app/CSV/'//test;
+const ACCESS_CODE_PATH = '/usr/src/app/CSV/'//docker test;
 const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';//docker test
 const GRANT_TYPE = 'client_credentials';
 const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
@@ -141,7 +141,8 @@ async function exportToCSV(data) {
                     { id: 'SalesAgent', title: 'SalesAgent' },
                     { id: 'SalesUit', title: 'SalesUit' },
                     { id: 'SalesAgentCode', title: 'SalesAgentCode' },
-                    { id: 'Term', title: 'Term' }
+                    { id: 'Term', title: 'Term' },
+                    { id: 'TermId', title: 'TermId' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -168,7 +169,8 @@ async function exportToCSV(data) {
                 SalesAgent: order.Sales_Agent__c,
                 SalesUit: order.Sales_Unit__c,
                 SalesAgentCode: order.Sales_Agent_Code__c,
-                Term: order.Account.Credit__c
+                Term: order.Account.Credit__c,
+                TermId: order.Term_Id__c
             }));
             
             await csvWriter.writeRecords(records);
@@ -269,4 +271,4 @@ export async function maintestOrders(offset) {
 
 // export { maintestOrders };
 
-// maintestOrders();
+maintestOrders();

@@ -220,6 +220,7 @@ function createVoucherJSON(order, products) {
                 modified_date: getFormattedDate(),
                 auto_refno: false,
                 payment_term_name: order["Term"],
+                payment_term_id: order["TermId"],
                 state: 0
             }
         ]
