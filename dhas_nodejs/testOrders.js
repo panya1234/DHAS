@@ -142,7 +142,8 @@ async function exportToCSV(data) {
                     { id: 'SalesUit', title: 'SalesUit' },
                     { id: 'SalesAgentCode', title: 'SalesAgentCode' },
                     { id: 'Term', title: 'Term' },
-                    { id: 'TermId', title: 'TermId' }
+                    { id: 'TermId', title: 'TermId' },
+                    { id: 'TermDate', title: 'TermDate' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -170,7 +171,8 @@ async function exportToCSV(data) {
                 SalesUit: order.Sales_Unit__c,
                 SalesAgentCode: order.Sales_Agent_Code__c,
                 Term: order.Account.Credit__c,
-                TermId: order.Term_Id__c
+                TermId: order.Term_Id__c,
+                TermDate: order.Pay_Within_Date__c
             }));
             
             await csvWriter.writeRecords(records);
@@ -219,7 +221,8 @@ async function exportToCSV(data) {
                     { id: 'ListPrice', title: 'ListPrice' },
                     { id: 'ProductName', title: 'ProductName' },
                     { id: 'Conversion', title: 'Conversion' },
-                    { id: 'Vat', title: 'Vat' }
+                    { id: 'Vat', title: 'Vat' },
+                    { id: 'Discount', title: 'Discount' }
                 ],
                 append: hasFile,
                 alwaysQuote: true
@@ -235,7 +238,8 @@ async function exportToCSV(data) {
                 ListPrice: orderLine.ListPrice,
                 ProductName: orderLine.Product2.Name,
                 Conversion: orderLine.Product2.Conversion__c,
-                Vat: orderLine.Vat__c
+                Vat: orderLine.Vat__c,
+                Discount: orderLine.Discount__c
             }));
 
             await csvWriter.writeRecords(records);

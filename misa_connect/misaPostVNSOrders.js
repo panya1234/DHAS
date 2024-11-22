@@ -122,6 +122,8 @@ function createVoucherJSON(order, products) {
         const productName = product.ProductName;
         const productCode = product["Product Code"];
         const lineAmount = parseFloat((quantity * unit_price).toFixed(2));
+        const discount = parseFloat(product.Discount);
+        const discountAmount = parseFloat((lineAmount * (discount/100)).toFixed(2));
 
         const vat = parseInt(product.Vat);
         const vatAmount = parseInt((unit_price * (vat/100)).toFixed(2));
@@ -155,6 +157,9 @@ function createVoucherJSON(order, products) {
             vat_rate: vat,
             vat_amount: vatAmount,
             vat_amount_oc: vatAmount,
+            discount_rate: discount,
+            discount_amount: discountAmount,
+            discount_amount_oc: discountAmount,
             state: 0
         };
     });
@@ -181,7 +186,6 @@ function createVoucherJSON(order, products) {
                 account_object_address: address,
                 shipping_address: shipAddress,
                 delivered_status: 2,
-                due_day: 0,
                 refdate: getFormattedDate(),
                 delivery_date: getFormattedDate(),
                 is_calculated_cost: true,
@@ -193,7 +197,6 @@ function createVoucherJSON(order, products) {
                 employee_name: order["SalesAgent"],
                 employee_code: order["SalesAgentCode"],
                 currency_id: "VND",
-                discount_type: 0,
                 discount_rate_voucher: 0.0,
                 total_amount_made: 0.0,
                 total_amount_made_oc: 0.0,
@@ -221,6 +224,8 @@ function createVoucherJSON(order, products) {
                 auto_refno: false,
                 payment_term_name: order["Term"],
                 payment_term_id: order["TermId"],
+                due_day: order["TermDate"],
+                discount_type: 1,
                 state: 0
             }
         ]
