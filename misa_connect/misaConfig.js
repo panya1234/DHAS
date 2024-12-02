@@ -17,12 +17,12 @@ const WRITE_CANCEL_PATH = 'CSV/WRITE/CancelOrders/';
 const ACCOUNT_PATH  = 'CSV/WRITE/Logs/AccountLogs/';
 const PRODUCT_PATH = 'CSV/WRITE/Logs/ProductLogs/';
 
-// const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
-// const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
+const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
+const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
 
-// const APP_ID = '5f4a649a-af16-4d98-afa0-3554314642da';
-// const ACCESS_CODE = 'NtIFcB2K0dVPwhPC9bCOw6pWGJ3cdNZxl0jbV1MA+0Ie3rDXt56p0lAPb7XiIKbsNRlAoS7jZrUhNfH//CxOezOAP0ZepaJHCtSClFJr72mdhmTVG3YKCvOxMtLWBg6XIEixPZmGAqb8J9mz3mAzTKfTHupvNieLDGm7InXkLWkkNS1ljLn4Je8AxF6pXv4jpvx7ofEsSY4TFyAcSIhF3Vq/FKhx+2i17hXFjQ9RQqZhEN9QDLl1T8W3Vcj1Q/mYTejfFPD8alzgep1G8o83FA==';
-// const ORG_COMPANY_CODE = 'congtydemoketnoiact';
+const APP_ID = '5f4a649a-af16-4d98-afa0-3554314642da';
+const ACCESS_CODE = '0FRen5JnNpwix0K+/DzfUWfInM4om3HO2vfq2V8HF0W9KxjnMAAr8jDzs+Z28wNyQ1IQpLMpCC5aR53sKr+z/s1R+pr4R0Es4w/SbrZjcfDQNiwi2j/GF28I4a4X7NZvA/aRZuLfqnbWF/WJ/VCNPquM45pygflTdFEseoAPYUqaw2Hobba3FB9tOu0+RCF+GKqoUpdtQHjGkMgLjbTTXZcZpcDQ8J1oEx7gVDyneOKWrhjSSCJi4SKtypCbnQmveUNefjpcPF6yOW6Acu2wgQ==';
+const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 
 // const SF_URL = 'https://flow-dream-5899.my.salesforce.com';
 // const SF_URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
@@ -36,12 +36,12 @@ const PRODUCT_PATH = 'CSV/WRITE/Logs/ProductLogs/';
 // const ACCOUNT_PATH  = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Logs/AccountLogs/';
 // const PRODUCT_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/WRITE/Logs/ProductLogs/';
 
-const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
-const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
+// const URL = 'https://actapp.misa.vn/apir/sync/actopen/';
+// const URL_TOKEN = 'https://actapp.misa.vn/api/oauth/actopen/connect';
 
-const APP_ID = '5f4a649a-af16-4d98-afa0-3554314642da';
-const ACCESS_CODE = 'fPPtoxcHSQ+OH5D9gjOchOssdsmXfcPaI23eP9OaOLMcKvcC0uduvV2zG+GbHjArunQcCbqo2ALR7BLv3mkCdKy2XpMw87nGTK9hBYQcS5JIIshyWDQOrV7/wKVzb00ZALw06szwIjZcIXARYEXX9pJ7s6nHjvtC9qHFek8Q5ZulZFKsiuUWen07qOnDHg7TZshwcx9O2qVyna303WJe6Q==';
-const ORG_COMPANY_CODE = 'congtydemoketnoiact';
+// const APP_ID = '5f4a649a-af16-4d98-afa0-3554314642da';
+// const ACCESS_CODE = 'fPPtoxcHSQ+OH5D9gjOchOssdsmXfcPaI23eP9OaOLMcKvcC0uduvV2zG+GbHjArunQcCbqo2ALR7BLv3mkCdKy2XpMw87nGTK9hBYQcS5JIIshyWDQOrV7/wKVzb00ZALw06szwIjZcIXARYEXX9pJ7s6nHjvtC9qHFek8Q5ZulZFKsiuUWen07qOnDHg7TZshwcx9O2qVyna303WJe6Q==';
+// const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 
 const SF_URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 const SF_URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
