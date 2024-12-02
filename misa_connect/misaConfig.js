@@ -24,8 +24,8 @@ const APP_ID = '5f4a649a-af16-4d98-afa0-3554314642da';
 const ACCESS_CODE = '0FRen5JnNpwix0K+/DzfUWfInM4om3HO2vfq2V8HF0W9KxjnMAAr8jDzs+Z28wNyQ1IQpLMpCC5aR53sKr+z/s1R+pr4R0Es4w/SbrZjcfDQNiwi2j/GF28I4a4X7NZvA/aRZuLfqnbWF/WJ/VCNPquM45pygflTdFEseoAPYUqaw2Hobba3FB9tOu0+RCF+GKqoUpdtQHjGkMgLjbTTXZcZpcDQ8J1oEx7gVDyneOKWrhjSSCJi4SKtypCbnQmveUNefjpcPF6yOW6Acu2wgQ==';
 const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 
-// const SF_URL = 'https://flow-dream-5899.my.salesforce.com';
-// const SF_URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
+const SF_URL = 'https://flow-dream-5899.my.salesforce.com';
+const SF_URL_TOKEN = 'https://flow-dream-5899.my.salesforce.com';
 
 // --------------------------test--------------------------
 // const ACCESS_CODE_PATH = 'C:/Users/panya/Downloads/DHAS/DHAS/dhas_nodejs/CSV/';
@@ -43,22 +43,22 @@ const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 // const ACCESS_CODE = 'fPPtoxcHSQ+OH5D9gjOchOssdsmXfcPaI23eP9OaOLMcKvcC0uduvV2zG+GbHjArunQcCbqo2ALR7BLv3mkCdKy2XpMw87nGTK9hBYQcS5JIIshyWDQOrV7/wKVzb00ZALw06szwIjZcIXARYEXX9pJ7s6nHjvtC9qHFek8Q5ZulZFKsiuUWen07qOnDHg7TZshwcx9O2qVyna303WJe6Q==';
 // const ORG_COMPANY_CODE = 'congtydemoketnoiact';
 
-const SF_URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
-const SF_URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
+// const SF_URL = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
+// const SF_URL_TOKEN = 'https://flow-dream-5899--partialuat.sandbox.my.salesforce.com';
 
 //---SF---
 
-const USERNAME = 'panyakan@ignite-idea.com.partialuat';
-const PASSWORD = 'Admin123456789';
-const GRANT_TYPE = 'client_credentials';
-const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
-const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
-
-// const USERNAME = 'bowonwit@dev-dhas.com';
-// const PASSWORD = 'IgniteIdea@123456';
+// const USERNAME = 'panyakan@ignite-idea.com.partialuat';
+// const PASSWORD = 'Admin123456789';
 // const GRANT_TYPE = 'client_credentials';
-// const CLIENT_ID = '3MVG95mg0lk4batj7J4KCkLZHEHITnr3x_gKU2htHWqUhqQsqZEsIjW1hNfuctSWXnd1e71EQRDOudqysZmTr';
-// const CLIENT_SECRET = '4866734FA62C03DB4CD10BD81E047D609D141913DA4BCB9A920C8A99421A15A8';
+// const CLIENT_ID = '3MVG9ZUGg10Hh225RbX1U1kcY_Zv486W9mwGUz7U1rf.BsZXx8Hr_vi6FRspmR6PnZjy88JzJ5tIRVfDT1C.A';
+// const CLIENT_SECRET = 'DB1CDFF94E04C8027203F7F2CDB2C5378D021187E3B58BDFE886AFF99B4D5C4A';
+
+const USERNAME = 'bowonwit@dev-dhas.com';
+const PASSWORD = 'IgniteIdea@123456';
+const GRANT_TYPE = 'client_credentials';
+const CLIENT_ID = '3MVG95mg0lk4batj7J4KCkLZHEHITnr3x_gKU2htHWqUhqQsqZEsIjW1hNfuctSWXnd1e71EQRDOudqysZmTr';
+const CLIENT_SECRET = '4866734FA62C03DB4CD10BD81E047D609D141913DA4BCB9A920C8A99421A15A8';
 
 export { URL };
 export { URL_TOKEN };
