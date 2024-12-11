@@ -9,22 +9,22 @@ const JOB_SCHEDULE_PHPACCOUNTS = '30 4 * * *';
 const JOB_SCHEDULE_PHPPRODUCTS = '30 4 * * *';
 
 // 
-// const ACCESS_CODE_PATH = '/usr/src/app/CSV/';
-// const READ_PATH = '/usr/src/app/CSV/READ/';
-// const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
-// const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
-// const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
-// const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
-// const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
+const ACCESS_CODE_PATH = '/usr/src/app/CSV/';
+const READ_PATH = '/usr/src/app/CSV/READ/';
+const WRITE_PATH = '/usr/src/app/CSV/WRITE/Orders/';
+const WRITE_CANCEL_PATH = '/usr/src/app/CSV/WRITE/CancelOrders/';
+const ACCOUNT_PATH  = '/usr/src/app/CSV/WRITE/Logs/AccountLogs/';
+const PRODUCT_PATH = '/usr/src/app/CSV/WRITE/Logs/ProductLogs/';
+const ERROR_ORDER_PATH = '/usr/src/app/CSV/WRITE/Logs/OrderLogs/';
 
 // 
-const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';//test
-const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';//test
-const ACCESS_CODE_PATH = './CSV/'//test;
-const READ_PATH = './CSV/READ/'//test;
-const WRITE_PATH = './CSV/WRITE/Orders/';//test
-const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
-const ERROR_ORDER_PATH = './CSV/WRITE/Logs/OrderLogs/';//test
+// const ACCOUNT_PATH  = './CSV/WRITE/Logs/AccountLogs/';//test
+// const PRODUCT_PATH = './CSV/WRITE/Logs/ProductLogs/';//test
+// const ACCESS_CODE_PATH = './CSV/'//test;
+// const READ_PATH = './CSV/READ/'//test;
+// const WRITE_PATH = './CSV/WRITE/Orders/';//test
+// const WRITE_CANCEL_PATH = './CSV/WRITE/CancelOrders/';//test
+// const ERROR_ORDER_PATH = './CSV/WRITE/Logs/OrderLogs/';//test
 
 // oauth2 info
 //sandbox
