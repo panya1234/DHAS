@@ -118,11 +118,16 @@ function createVoucherJSON(order, products) {
         const externalId = product["External Id"].toString();
         const whereHouse = externalId.slice(-4);
         const unitName = product["Sales U/M"];
-        const unit_price = parseFloat(product.UnitPrice);
+        const discount = parseFloat(product.Discount);        
+        let unit_price = 0;
+        if (discount === 0 || isNaN(discount)) {
+            unit_price = parseFloat(product.UnitPrice);
+        } else {
+            unit_price = parseFloat(product.UnitPrice / ((100 - discount)/100));
+        }
         const productName = product.ProductName;
         const productCode = product["Product Code"];
         const lineAmount = parseFloat((quantity * unit_price).toFixed(2));
-        const discount = parseFloat(product.Discount);
         const discountAmount = parseFloat((lineAmount * (discount/100)).toFixed(2));
 
         const vat = parseInt(product.Vat);
@@ -237,7 +242,7 @@ function createVoucherJSON(order, products) {
 async function postOrders(order, products, token) {
     try {
         const voucherJSON = createVoucherJSON(order, products);
-        console.log('Voucher JSON:', JSON.stringify(voucherJSON, null, 2));
+        // console.log('Voucher JSON:', JSON.stringify(voucherJSON, null, 2));
         const response = await axios.post(`${URL}save`,
             voucherJSON,
             {
