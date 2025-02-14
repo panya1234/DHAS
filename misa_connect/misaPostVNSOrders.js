@@ -131,7 +131,7 @@ function createVoucherJSON(order, products) {
         const discountAmount = parseFloat((lineAmount * (discount/100)).toFixed(2));
 
         const vat = parseInt(product.Vat);
-        const vatAmount = parseInt((unit_price * (vat/100)).toFixed(2));
+        const vatAmount = parseInt((lineAmount * (vat/100)).toFixed(2));
         return {
             sort_order: index + 1,
             is_promotion: false,
